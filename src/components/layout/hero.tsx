@@ -52,7 +52,7 @@ export function Hero() {
 
         {/* Subtítulo */}
         <motion.p variants={itemVariants} className="font-inter text-lg md:text-xl text-foreground/70 max-w-2xl mb-10 leading-relaxed">
-          O <strong className="text-foreground font-semibold">Café Labs</strong> é um ecossistema multisetorial onde ideias viram código, design e produto. Criamos MVPs ágeis para validar hipóteses antes do café esfriar.
+          A <strong className="text-foreground font-semibold">Café Labs</strong> é um ecossistema multisetorial onde ideias viram código, design e produto. Criamos MVPs ágeis para validar hipóteses antes do café esfriar.
         </motion.p>
 
         {/* Botões de Ação (CTAs) */}
