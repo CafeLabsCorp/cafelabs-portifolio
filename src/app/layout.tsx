@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Poppins, Fira_Code } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "../providers/theme-provider";
-import { Header } from "../components/layout/header"; // <-- NOVA IMPORTAÇÃO
+import { Header } from "../components/layout/header";
+import { Footer } from "../components/layout/footer"; // <-- NOVA IMPORTAÇÃO
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const poppins = Poppins({ weight: ['400', '600', '700', '900'], subsets: ["latin"], variable: "--font-poppins" });
@@ -22,8 +23,9 @@ export default function RootLayout({
     <html lang="pt-BR" suppressHydrationWarning>
       <body className={`${inter.variable} ${poppins.variable} ${firaCode.variable} font-inter antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Header /> {/* <-- HEADER INJETADO AQUI */}
+          <Header />
           {children}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
