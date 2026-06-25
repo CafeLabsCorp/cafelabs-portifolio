@@ -1,13 +1,24 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { FlaskConical, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { Menu, X } from "lucide-react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "../ui/theme-toggle";
+import { useTheme } from "next-themes"; // Importante: adicionado para controlar o tema
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
+
+  // Hooks para controle seguro do tema
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // Evita o erro de "Hydration Mismatch" do Next.js
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const links = [
     { name: "Manifesto", href: "#manifesto" },
@@ -19,10 +30,10 @@ export function Header() {
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, href: string) => {
     e.preventDefault();
     setIsOpen(false); // Fecha o menu mobile se estiver aberto
-    
+
     const targetId = href.replace(/.*\#/, "");
     const elem = document.getElementById(targetId);
-    
+
     if (elem) {
       elem.scrollIntoView({ behavior: "smooth" });
       // Atualiza a URL de forma silenciosa
@@ -33,22 +44,38 @@ export function Header() {
   return (
     <header className="fixed top-0 w-full z-50 border-b border-borderUI bg-background/80 backdrop-blur-md">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        
+
         {/* Logo */}
-        <Link 
-          href="/" 
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} 
-          className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+        <Link
+          href="/"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="flex items-center gap-3 hover:opacity-80 transition-opacity"
         >
-          <FlaskConical className="w-5 h-5 text-accent" />
-          <span className="font-poppins font-bold text-lg tracking-tight">Café Labs</span>
+          {/* Logo Condicional à Prova de Falhas */}
+          <div className="relative w-15 h-15 flex-shrink-0 flex items-center justify-center">
+            {mounted ? (
+              <Image
+                src={resolvedTheme === "dark" ? "/logo_dark.svg" : "/logo_light.svg"}
+                alt="Logo Café Labs"
+                width={55}
+                height={55}
+                priority
+                className="object-contain"
+              />
+            ) : (
+              // 3. Altere o placeholder para o mesmo tamanho para a tela não pular
+              <div className="w-12 h-12 bg-transparent" />
+            )}
+          </div>
+
+          <span className="font-poppins font-bold text-xl tracking-tight">Café Labs</span>
         </Link>
 
         {/* Navegação Desktop */}
         <nav className="hidden md:flex items-center gap-8">
           {links.map((link) => (
-            <a 
-              key={link.name} 
+            <a
+              key={link.name}
               href={link.href}
               onClick={(e) => handleScroll(e, link.href)}
               className="text-sm font-inter text-foreground/80 hover:text-accent transition-colors cursor-pointer"
@@ -61,8 +88,8 @@ export function Header() {
         {/* Ações Desktop & Toggle Mobile */}
         <div className="flex items-center gap-4">
           <ThemeToggle />
-          
-          <a 
+
+          <a
             href="#contato"
             onClick={(e) => handleScroll(e, "#contato")}
             className="hidden md:flex bg-foreground text-background font-poppins text-sm font-semibold px-5 py-2 rounded-full hover:scale-105 transition-transform cursor-pointer"
@@ -71,7 +98,7 @@ export function Header() {
           </a>
 
           {/* Botão Hambúrguer */}
-          <button 
+          <button
             className="md:hidden p-2 text-foreground"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Abrir Menu"
@@ -118,3 +145,32 @@ export function Header() {
     </header>
   );
 }
+
+// import { Anel } from "../ui/logo-anel";
+// import { Bloco } from "../ui/logo-bloco";
+// import { Centelha } from "../ui/logo-centelha";
+// import { Chemex } from "../ui/logo-chemex";
+// import { CuboCL } from "../ui/logo-cubocl";
+// import { ErlenmeierCafeteira } from "../ui/logo-erlenmeier-cafeteira";
+// import { Erlenmeyer } from "../ui/logo-erlenmeyer";
+// import { Fluxo } from "../ui/logo-fluxo";
+// import { Grao } from "../ui/logo-grao";
+// import { Matriz } from "../ui/logo-matriz";
+// import { Nucleo } from "../ui/logo-nucleo";
+// import { Orbital } from "../ui/logo-orbital";
+// import { Xicara } from "../ui/logo-xicara";
+
+{/* <Anel className="w-7 h-7" />
+<Bloco className="w-7 h-7" />
+<Centelha className="w-7 h-7" />
+<Chemex className="w-7 h-7" />
+<CuboCL className="w-7 h-7" />
+<ErlenmeierCafeteira className="w-7 h-7" />
+<Erlenmeyer className="w-7 h-7" />
+<Fluxo className="w-7 h-7" />
+<Grao className="w-7 h-7" />
+<Matriz className="w-7 h-7" />
+<Nucleo className="w-7 h-7" />
+<Orbital className="w-7 h-7" />
+<Xicara className="w-7 h-7" />
+<span className="font-poppins font-bold text-xl tracking-tight">Café Labs</span> */}
