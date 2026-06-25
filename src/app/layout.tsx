@@ -12,6 +12,20 @@ const firaCode = Fira_Code({ subsets: ["latin"], variable: "--font-fira-code" })
 export const metadata: Metadata = {
   title: "Café Labs | Sandbox Multisetorial",
   description: "Ecossistema de experimentação prática onde ideias viram software, design e produto.",
+  icons: {
+    icon: [
+      {
+        media: "(prefers-color-scheme: light)",
+        url: "/logo_light.svg",
+        href: "/logo_light.svg",
+      },
+      {
+        media: "(prefers-color-scheme: dark)",
+        url: "/logo_dark.svg",
+        href: "/logo_dark.svg",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
