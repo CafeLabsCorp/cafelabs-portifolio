@@ -2,12 +2,23 @@
 
 import { Coffee, Copy, Check, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image"
-import { useState } from "react";
+import Image from "next/image";
+import { useState, useEffect } from "react";
 
 export function Footer() {
   const [copied, setCopied] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const email = "contato@cafelabs.net";
+
+  // Detecção de dispositivo rodando apenas no client-side
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const userAgent = navigator.userAgent || navigator.vendor;
+      const mobileRegex = /android|ipad|iphone|ipod|windows phone/i;
+      
+      setIsMobile(mobileRegex.test(userAgent));
+    }
+  }, []);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(email);
@@ -16,6 +27,10 @@ export function Footer() {
       setCopied(false);
     }, 2000);
   };
+
+  // Links dinâmicos
+  const linkMobile = `mailto:${email}`;
+  const linkDesktop = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}`;
 
   return (
     <footer id="contato" className="w-full border-t border-borderUI bg-background pt-24 pb-8">
@@ -33,9 +48,9 @@ export function Footer() {
             Vamos tomar um café, desenhar a arquitetura e construir o seu próximo MVP. A nossa máquina de testes nunca desliga.
           </p>
 
-          {/* Botão Primário: Redirecionamento Gmail */}
+          {/* Botão Primário: Redirecionamento Dinâmico */}
           <a
-            href={`https://mail.google.com/mail/?view=cm&fs=1&to=${email}`}
+            href={isMobile ? linkMobile : linkDesktop}
             target="_blank"
             rel="noopener noreferrer"
             className="group flex items-center gap-3 px-8 py-4 bg-foreground text-background rounded-full font-poppins font-semibold hover:scale-105 transition-all"
