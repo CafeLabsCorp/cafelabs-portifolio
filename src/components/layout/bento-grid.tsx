@@ -15,6 +15,15 @@ const experimentos = [
     stack: ["Flutter", "Firebase", "Riverpod"],
     span: "md:col-span-2", // Ocupa duas colunas
   },
+  {
+    id: 2,
+    title: "Dindin",
+    logo: "/dindin-logo.svg",
+    description: "Controle financeiro pessoal por 'caixinhas': receitas entram, são alocadas entre categorias e os gastos saem de cada uma.",
+    status: "ATIVO",
+    stack: ["Flutter", "Firebase", "Riverpod"],
+    span: "md:col-span-1", // Ocupa uma coluna
+  },
 ];
 
 export function BentoGrid() {
