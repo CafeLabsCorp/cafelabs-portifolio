@@ -2,41 +2,19 @@
 
 import { motion, Variants } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 
 // Os dados dos seus MVPs (Isso facilita muito a manutenção no futuro)
 const experimentos = [
   {
     id: 1,
-    title: "Rotas Turismo",
-    description: "Sistema de itinerários dinâmicos utilizando algoritmos de otimização de grafos para mobilidade urbana e turismo.",
-    status: "validado",
-    stack: ["Next.js", "Python", "Neo4j"],
+    title: "Domo",
+    logo: "/domo-logo.svg",
+    description: "App de gestão doméstica para famílias e grupos: dispensa compartilhada, lista de compras e organização da casa por membros.",
+    status: "beta",
+    stack: ["Flutter", "Firebase", "Riverpod"],
     span: "md:col-span-2", // Ocupa duas colunas
   },
-  {
-    id: 2,
-    title: "ClockIt",
-    description: "Plataforma de monitoramento de tempo e gestão de produtividade para desenvolvedores e acadêmicos.",
-    status: "beta",
-    stack: ["React", "PostgreSQL"],
-    span: "md:col-span-1", // Ocupa uma coluna
-  },
-  {
-    id: 3,
-    title: "Essencial Drop #01",
-    description: "Teste de viabilidade, logística e fornecedores para marca própria de vestuário minimalista (Setor Moda).",
-    status: "mvp_fisico",
-    stack: ["Shopify", "Logística"],
-    span: "md:col-span-1",
-  },
-  {
-    id: 4,
-    title: "Checkout Converter",
-    description: "Validação de esteiras de produtos e otimização de conversão utilizando testes A/B em gateways de pagamento.",
-    status: "coletando_dados",
-    stack: ["Stripe", "Analytics"],
-    span: "md:col-span-2",
-  }
 ];
 
 export function BentoGrid() {
@@ -91,9 +69,20 @@ export function BentoGrid() {
 
             {/* Corpo do Card */}
             <div>
-              <h3 className="font-poppins text-2xl font-semibold mb-3">
-                {projeto.title}
-              </h3>
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-xl bg-foreground/5 border border-borderUI flex items-center justify-center p-1.5 flex-shrink-0">
+                  <Image
+                    src={projeto.logo}
+                    alt={`Logo do ${projeto.title}`}
+                    width={32}
+                    height={32}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <h3 className="font-poppins text-2xl font-semibold">
+                  {projeto.title}
+                </h3>
+              </div>
               <p className="font-inter text-foreground/70 mb-8 line-clamp-3">
                 {projeto.description}
               </p>
