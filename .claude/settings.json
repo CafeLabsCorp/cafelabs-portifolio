@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls /home/felip/.claude/projects/-home-felip-projetos-cafelabs-portifolio/memory/ 2>/dev/null; echo \"---\"; find /home/felip/projetos -maxdepth 1 -iname \"*domo*\" -o -iname \"*dindin*\" 2>/dev/null)",
+      "Read(//home/felip/projetos/**)",
+      "Read(//home/felip/projetos/domo/**)",
+      "Read(//home/felip/projetos/dindin/**)",
+      "Bash(git -C /home/felip/projetos/domo log --oneline -10)",
+      "Bash(git -C /home/felip/projetos/dindin log --oneline -10)",
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000)",
+      "Skill(run)",
+      "Skill(run:*)",
+      "Bash(find / -maxdepth 4 -iname \"*chromium-cli*\")",
+      "Bash(npm ls *)",
+      "Bash(find / -maxdepth 6 -iname \"playwright\" -type d)",
+      "Bash(curl -s http://localhost:3000/)",
+      "Bash(grep -o '.\\\\{0,80\\\\}status:.\\\\{0,80\\\\}')",
+      "Bash(curl -s http://localhost:3000/ -o /tmp/claude-1000/-home-felip-projetos-cafelabs-portifolio/cd783a56-dec1-49b3-a864-81df54188549/scratchpad/page.html)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(echo \"=== domo assets ===\"; find /home/felip/projetos/domo -iname \"*.svg\" | grep -vi node_modules | grep -vi build *)",
+      "Read(//home/felip/projetos/domo/assets/icons/**)",
+      "Read(//home/felip/projetos/dindin/assets/**)",
+      "Bash(cp /home/felip/projetos/domo/assets/icons/domo_icon.svg /home/felip/projetos/cafelabs-portifolio/public/domo-logo.svg)",
+      "Bash(cp /home/felip/projetos/dindin/assets/logo.svg /home/felip/projetos/cafelabs-portifolio/public/dindin-logo.svg)",
+      "Bash(curl -s -o /dev/null -w \"domo: %{http_code}\\\\n\" http://localhost:3000/domo-logo.svg)",
+      "Bash(curl -s -o /dev/null -w \"dindin: %{http_code}\\\\n\" http://localhost:3000/dindin-logo.svg)",
+      "Bash(npx --yes playwright --version)",
+      "Bash(google-chrome --headless --disable-gpu --no-sandbox --window-size=1400,1000 --screenshot=/tmp/claude-1000/-home-felip-projetos-cafelabs-portifolio/cd783a56-dec1-49b3-a864-81df54188549/scratchpad/bento.png \"http://localhost:3000/#laboratorio\")",
+      "Bash(google-chrome --headless=new --disable-gpu --no-sandbox --window-size=1400,3000 --virtual-time-budget=5000 --run-all-compositor-stages-before-draw --screenshot=/tmp/claude-1000/-home-felip-projetos-cafelabs-portifolio/cd783a56-dec1-49b3-a864-81df54188549/scratchpad/bento2.png \"http://localhost:3000/\")",
+      "Bash(google-chrome --headless=new --disable-gpu --no-sandbox --window-size=1400,1400 --run-all-compositor-stages-before-draw --screenshot=/tmp/claude-1000/-home-felip-projetos-cafelabs-portifolio/cd783a56-dec1-49b3-a864-81df54188549/scratchpad/bento3.png --window-position=0,0 'data:text/html,<script>window.location='\\\\''http://localhost:3000/#laboratorio'\\\\''</script>')",
+      "Bash(google-chrome --headless=new --disable-gpu --no-sandbox --window-size=1400,8000 --virtual-time-budget=6000 --run-all-compositor-stages-before-draw --screenshot=/tmp/claude-1000/-home-felip-projetos-cafelabs-portifolio/cd783a56-dec1-49b3-a864-81df54188549/scratchpad/bento4.png http://localhost:3000/)",
+      "Bash(python3 -c ' *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
+    ]
+  }
+}
