@@ -1,11 +1,21 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Blocks, Brain, LucideIcon } from "lucide-react";
 import Image from "next/image";
 
 // Os dados dos seus MVPs (Isso facilita muito a manutenção no futuro)
-const experimentos = [
+const experimentos: {
+  id: number;
+  title: string;
+  logo?: string;
+  icon?: LucideIcon;
+  description: string;
+  status: string;
+  stack: string[];
+  span: string;
+  link?: string;
+}[] = [
   {
     id: 1,
     title: "Domo",
@@ -14,6 +24,7 @@ const experimentos = [
     status: "beta",
     stack: ["Flutter", "Firebase", "Riverpod"],
     span: "md:col-span-2", // Ocupa duas colunas
+    link: "https://domo.cafelabs.net",
   },
   {
     id: 2,
@@ -23,6 +34,27 @@ const experimentos = [
     status: "ATIVO",
     stack: ["Flutter", "Firebase", "Riverpod"],
     span: "md:col-span-1", // Ocupa uma coluna
+    link: "https://dindin.cafelabs.net",
+  },
+  {
+    id: 3,
+    title: "Forge Skill Library",
+    icon: Blocks,
+    description: "Galeria dos agentes especializados do Forge (orquestrador + time), com prompt completo e busca ao vivo do repositório público.",
+    status: "em breve",
+    stack: ["Next.js", "TypeScript"],
+    span: "md:col-span-1",
+    link: "https://forge.cafelabs.net",
+  },
+  {
+    id: 4,
+    title: "mind-template",
+    icon: Brain,
+    description: "Base genérica de conhecimento pessoal versionado e integrado ao Claude Code — clone e monte a sua própria 'mente' de projetos.",
+    status: "open source",
+    stack: ["Markdown", "Claude Code"],
+    span: "md:col-span-1",
+    link: "https://mind.cafelabs.net",
   },
 ];
 
@@ -53,63 +85,83 @@ export function BentoGrid() {
       </div>
 
       {/* O Grid Bento */}
-      <motion.div 
+      <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }} // Dispara a animação um pouco antes de aparecer na tela
         className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(250px,auto)]"
       >
-        {experimentos.map((projeto) => (
-          <motion.div 
-            key={projeto.id} 
-            variants={cardVariants}
-            className={`group relative flex flex-col justify-between p-8 rounded-3xl border border-borderUI bg-background hover:bg-foreground/[0.02] transition-colors overflow-hidden ${projeto.span}`}
-          >
-            {/* Header do Card (Status e Ícone) */}
-            <div className="flex justify-between items-start mb-8">
-              <span className="font-fira text-xs uppercase tracking-wider text-sandbox bg-sandbox/10 px-3 py-1 rounded-full">
-                [ status: {projeto.status} ]
-              </span>
-              <button className="p-2 rounded-full bg-foreground/5 opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">
-                <ArrowUpRight className="w-5 h-5 text-foreground" />
-              </button>
-            </div>
+        {experimentos.map((projeto) => {
+          const Icon = projeto.icon;
 
-            {/* Corpo do Card */}
-            <div>
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl bg-foreground/5 border border-borderUI flex items-center justify-center p-1.5 flex-shrink-0">
-                  <Image
-                    src={projeto.logo}
-                    alt={`Logo do ${projeto.title}`}
-                    width={32}
-                    height={32}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                <h3 className="font-poppins text-2xl font-semibold">
-                  {projeto.title}
-                </h3>
-              </div>
-              <p className="font-inter text-foreground/70 mb-8 line-clamp-3">
-                {projeto.description}
-              </p>
-            </div>
+          return (
+            <motion.div
+              key={projeto.id}
+              variants={cardVariants}
+              className={`group relative flex flex-col justify-between p-8 rounded-3xl border border-borderUI bg-background hover:bg-foreground/[0.02] transition-colors overflow-hidden ${projeto.span}`}
+            >
+              {projeto.link && (
+                <a
+                  href={projeto.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute inset-0 z-10"
+                  aria-label={`Abrir ${projeto.title}`}
+                />
+              )}
 
-            {/* Footer do Card (Stack) */}
-            <div className="flex flex-wrap gap-2 mt-auto">
-              {projeto.stack.map((tech) => (
-                <span 
-                  key={tech} 
-                  className="font-fira text-xs text-foreground/50 border border-borderUI px-2 py-1 rounded-md"
-                >
-                  {tech}
+              {/* Header do Card (Status e Ícone) */}
+              <div className="flex justify-between items-start mb-8">
+                <span className="font-fira text-xs uppercase tracking-wider text-sandbox bg-sandbox/10 px-3 py-1 rounded-full">
+                  [ status: {projeto.status} ]
                 </span>
-              ))}
-            </div>
-          </motion.div>
-        ))}
+                {projeto.link && (
+                  <button className="p-2 rounded-full bg-foreground/5 opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">
+                    <ArrowUpRight className="w-5 h-5 text-foreground" />
+                  </button>
+                )}
+              </div>
+
+              {/* Corpo do Card */}
+              <div>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-xl bg-foreground/5 border border-borderUI flex items-center justify-center p-1.5 flex-shrink-0">
+                    {projeto.logo ? (
+                      <Image
+                        src={projeto.logo}
+                        alt={`Logo do ${projeto.title}`}
+                        width={32}
+                        height={32}
+                        className="w-full h-full object-contain"
+                      />
+                    ) : Icon ? (
+                      <Icon className="w-5 h-5 text-foreground" />
+                    ) : null}
+                  </div>
+                  <h3 className="font-poppins text-2xl font-semibold">
+                    {projeto.title}
+                  </h3>
+                </div>
+                <p className="font-inter text-foreground/70 mb-8 line-clamp-3">
+                  {projeto.description}
+                </p>
+              </div>
+
+              {/* Footer do Card (Stack) */}
+              <div className="flex flex-wrap gap-2 mt-auto">
+                {projeto.stack.map((tech) => (
+                  <span
+                    key={tech}
+                    className="font-fira text-xs text-foreground/50 border border-borderUI px-2 py-1 rounded-md"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          );
+        })}
       </motion.div>
     </section>
   );
