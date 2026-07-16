@@ -1,14 +1,16 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { ArrowUpRight, Blocks, Brain, LucideIcon } from "lucide-react";
+import { ArrowUpRight, Blocks, LucideIcon } from "lucide-react";
 import Image from "next/image";
+import { MindLogo } from "@/components/ui/mind-logo";
 
 // Os dados dos seus MVPs (Isso facilita muito a manutenção no futuro)
 const experimentos: {
   id: number;
   title: string;
   logo?: string;
+  logoComponent?: React.ComponentType<{ className?: string }>;
   icon?: LucideIcon;
   description: string;
   status: string;
@@ -48,8 +50,8 @@ const experimentos: {
   },
   {
     id: 4,
-    title: "mind-template",
-    icon: Brain,
+    title: "mind",
+    logoComponent: MindLogo,
     description: "Base genérica de conhecimento pessoal versionado e integrado ao Claude Code — clone e monte a sua própria 'mente' de projetos.",
     status: "open source",
     stack: ["Markdown", "Claude Code"],
@@ -94,6 +96,7 @@ export function BentoGrid() {
       >
         {experimentos.map((projeto) => {
           const Icon = projeto.icon;
+          const LogoComponent = projeto.logoComponent;
 
           return (
             <motion.div
@@ -135,6 +138,8 @@ export function BentoGrid() {
                         height={32}
                         className="w-full h-full object-contain"
                       />
+                    ) : LogoComponent ? (
+                      <LogoComponent className="w-full h-auto text-foreground" />
                     ) : Icon ? (
                       <Icon className="w-5 h-5 text-foreground" />
                     ) : null}
