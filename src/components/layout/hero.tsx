@@ -20,7 +20,7 @@ export function Hero() {
   };
 
   return (
-    <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center pt-20 overflow-hidden">
+    <section className="relative w-full min-h-dvh flex flex-col items-center justify-center pt-20 overflow-hidden">
       
       {/* Efeito visual de fundo (Glow sutil laranja) */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-accent/20 blur-[120px] rounded-full pointer-events-none -z-10 dark:bg-accent/10" />
@@ -74,6 +74,17 @@ export function Hero() {
           </Link>
         </motion.div>
       </motion.div>
+
+      <a
+        href="#manifesto"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 font-fira text-xs uppercase tracking-wide text-foreground/50 transition-colors hover:text-foreground/80"
+      >
+        role para ver mais
+        <ArrowRight
+          className="h-4 w-4 rotate-90 motion-safe:animate-bounce"
+          aria-hidden="true"
+        />
+      </a>
     </section>
   );
 }
