@@ -1,15 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { ThemeToggle } from "../ui/theme-toggle";
+import { LanguageSwitcher } from "../ui/language-switcher";
+import { Link } from "../../i18n/navigation";
 import { useTheme } from "next-themes"; // Importante: adicionado para controlar o tema
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const t = useTranslations("Header");
 
   // Hooks para controle seguro do tema
   const { resolvedTheme } = useTheme();
@@ -21,9 +24,9 @@ export function Header() {
   }, []);
 
   const links = [
-    { name: "Manifesto", href: "#manifesto" },
-    { name: "Laboratório", href: "#laboratorio" },
-    { name: "Setores", href: "#setores" },
+    { name: t("navManifesto"), href: "#manifesto" },
+    { name: t("navLaboratorio"), href: "#laboratorio" },
+    { name: t("navSetores"), href: "#setores" },
   ];
 
   // Função para forçar o scroll suave sempre que o botão for clicado
@@ -56,7 +59,7 @@ export function Header() {
             {mounted ? (
               <Image
                 src={resolvedTheme === "dark" ? "/logo_dark.svg" : "/logo_light.svg"}
-                alt="Logo Café Labs"
+                alt={t("logoAlt")}
                 width={55}
                 height={55}
                 priority
@@ -75,7 +78,7 @@ export function Header() {
         <nav className="hidden md:flex items-center gap-8">
           {links.map((link) => (
             <a
-              key={link.name}
+              key={link.href}
               href={link.href}
               onClick={(e) => handleScroll(e, link.href)}
               className="text-sm font-inter text-foreground/80 hover:text-accent transition-colors cursor-pointer"
@@ -87,6 +90,7 @@ export function Header() {
 
         {/* Ações Desktop & Toggle Mobile */}
         <div className="flex items-center gap-4">
+          <LanguageSwitcher />
           <ThemeToggle />
 
           <a
@@ -94,14 +98,14 @@ export function Header() {
             onClick={(e) => handleScroll(e, "#contato")}
             className="hidden md:flex bg-foreground text-background font-poppins text-sm font-semibold px-5 py-2 rounded-full hover:scale-105 transition-transform cursor-pointer"
           >
-            Tomar um Café
+            {t("cta")}
           </a>
 
           {/* Botão Hambúrguer */}
           <button
             className="md:hidden p-2 text-foreground"
             onClick={() => setIsOpen(!isOpen)}
-            aria-label="Abrir Menu"
+            aria-label={t("openMenu")}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -122,7 +126,7 @@ export function Header() {
             <div className="flex flex-col p-6 gap-6">
               {links.map((link) => (
                 <a
-                  key={link.name}
+                  key={link.href}
                   href={link.href}
                   onClick={(e) => handleScroll(e, link.href)}
                   className="text-lg font-inter text-foreground/90 hover:text-accent cursor-pointer"
@@ -136,7 +140,7 @@ export function Header() {
                 onClick={(e) => handleScroll(e, "#contato")}
                 className="flex items-center justify-center w-full bg-foreground text-background font-poppins text-base font-semibold px-5 py-4 rounded-full active:scale-95 transition-transform cursor-pointer"
               >
-                Tomar um Café
+                {t("cta")}
               </a>
             </div>
           </motion.div>
@@ -145,32 +149,3 @@ export function Header() {
     </header>
   );
 }
-
-// import { Anel } from "../ui/logo-anel";
-// import { Bloco } from "../ui/logo-bloco";
-// import { Centelha } from "../ui/logo-centelha";
-// import { Chemex } from "../ui/logo-chemex";
-// import { CuboCL } from "../ui/logo-cubocl";
-// import { ErlenmeierCafeteira } from "../ui/logo-erlenmeier-cafeteira";
-// import { Erlenmeyer } from "../ui/logo-erlenmeyer";
-// import { Fluxo } from "../ui/logo-fluxo";
-// import { Grao } from "../ui/logo-grao";
-// import { Matriz } from "../ui/logo-matriz";
-// import { Nucleo } from "../ui/logo-nucleo";
-// import { Orbital } from "../ui/logo-orbital";
-// import { Xicara } from "../ui/logo-xicara";
-
-{/* <Anel className="w-7 h-7" />
-<Bloco className="w-7 h-7" />
-<Centelha className="w-7 h-7" />
-<Chemex className="w-7 h-7" />
-<CuboCL className="w-7 h-7" />
-<ErlenmeierCafeteira className="w-7 h-7" />
-<Erlenmeyer className="w-7 h-7" />
-<Fluxo className="w-7 h-7" />
-<Grao className="w-7 h-7" />
-<Matriz className="w-7 h-7" />
-<Nucleo className="w-7 h-7" />
-<Orbital className="w-7 h-7" />
-<Xicara className="w-7 h-7" />
-<span className="font-poppins font-bold text-xl tracking-tight">Café Labs</span> */}

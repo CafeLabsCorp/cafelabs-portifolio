@@ -4,8 +4,10 @@ import { Coffee, Copy, Check, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 export function Footer() {
+  const t = useTranslations("Footer");
   const [copied, setCopied] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const email = "contato@cafelabs.net";
@@ -15,7 +17,7 @@ export function Footer() {
     if (typeof window !== "undefined") {
       const userAgent = navigator.userAgent || navigator.vendor;
       const mobileRegex = /android|ipad|iphone|ipod|windows phone/i;
-      
+
       setIsMobile(mobileRegex.test(userAgent));
     }
   }, []);
@@ -42,10 +44,10 @@ export function Footer() {
             <Coffee className="w-8 h-8 text-foreground" />
           </div>
           <h2 className="font-poppins text-4xl md:text-5xl font-bold tracking-tight mb-6">
-            Tem uma hipótese?
+            {t("heading")}
           </h2>
           <p className="font-inter text-foreground/70 text-lg max-w-xl mb-8">
-            Vamos tomar um café, desenhar a arquitetura e construir o seu próximo MVP. A nossa máquina de testes nunca desliga.
+            {t("description")}
           </p>
 
           {/* Botão Primário: Redirecionamento Dinâmico */}
@@ -58,12 +60,12 @@ export function Footer() {
             {/* Imagem do SVG local carregada pelo Next.js */}
             <Image
               src="/gmail.svg"
-              alt="Logo do Gmail"
+              alt={t("gmailAlt")}
               width={32}
               height={32}
               className="object-contain"
             />
-            Iniciar Experimento
+            {t("ctaPrimary")}
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
 
@@ -78,9 +80,9 @@ export function Footer() {
               <Copy className="w-4 h-4 group-hover:scale-110 transition-transform" />
             )}
             {copied ? (
-              <span className="text-sandbox font-medium">E-mail copiado com sucesso!</span>
+              <span className="text-sandbox font-medium">{t("emailCopied")}</span>
             ) : (
-              "Usa outro provedor? Copiar e-mail"
+              t("copyEmail")
             )}
           </button>
         </div>
@@ -98,8 +100,8 @@ export function Footer() {
           </div>
 
           <div className="font-fira text-xs text-foreground/40 text-center md:text-right">
-            © {new Date().getFullYear()} Desenvolvido no Café Labs. <br />
-            Hospedado na Vercel.
+            © {new Date().getFullYear()} {t("developedBy")} <br />
+            {t("hostedOn")}
           </div>
         </div>
 

@@ -2,11 +2,13 @@
 
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const t = useTranslations("ThemeToggle");
 
   // Evita o erro de hidratação do Next.js
   useEffect(() => setMounted(true), []);
@@ -16,7 +18,7 @@ export function ThemeToggle() {
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       className="p-2 rounded-full border border-borderUI hover:bg-foreground/5 transition-colors"
-      aria-label="Alternar tema"
+      aria-label={t("label")}
     >
       {theme === "dark" ? (
         <Sun size={18} className="text-foreground" />

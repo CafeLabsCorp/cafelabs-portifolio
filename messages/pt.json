@@ -1,0 +1,87 @@
+{
+  "Header": {
+    "navManifesto": "Manifesto",
+    "navLaboratorio": "Laboratório",
+    "navSetores": "Setores",
+    "cta": "Tomar um Café",
+    "logoAlt": "Logo Café Labs",
+    "openMenu": "Abrir Menu"
+  },
+  "Footer": {
+    "heading": "Tem uma hipótese?",
+    "description": "Vamos tomar um café, desenhar a arquitetura e construir o seu próximo MVP. A nossa máquina de testes nunca desliga.",
+    "gmailAlt": "Logo do Gmail",
+    "ctaPrimary": "Iniciar Experimento",
+    "copyEmail": "Usa outro provedor? Copiar e-mail",
+    "emailCopied": "E-mail copiado com sucesso!",
+    "developedBy": "Desenvolvido no Café Labs.",
+    "hostedOn": "Hospedado na Vercel."
+  },
+  "Hero": {
+    "badge": "Sandbox_Ativo: v1.0",
+    "titleLine1": "Testar. Construir.",
+    "titleLine2": "Validar.",
+    "subtitle": "A <strong>Café Labs</strong> é um ecossistema multisetorial onde ideias viram código, design e produto. Criamos MVPs ágeis para validar idéias antes do café esfriar.",
+    "ctaPrimary": "Ver Experimentos",
+    "ctaSecondary": "Entender o Modelo",
+    "scrollHint": "role para ver mais"
+  },
+  "Manifesto": {
+    "headingLine1": "A cafeína da",
+    "headingLine2": "inovação ágil.",
+    "directive": "/* Diretriz Operacional v1.0 */",
+    "paragraph1": "O modelo tradicional de negócios é lento e caro. O Café Labs funciona como uma incubadora particular: um ambiente seguro para o erro e desenhado para o acerto rápido.",
+    "paragraph2": "Nós não criamos planos de negócios de 50 páginas. Nós criamos código, designs e protótipos físicos. Misturamos a energia acolhedora do café com o rigor técnico de um laboratório para descobrir o que realmente tem valor de mercado.",
+    "pilar1Title": "1. Construir (MVP)",
+    "pilar1Desc": "Transformamos hipóteses em versões mínimas viáveis com o menor custo e tempo possíveis. Sem excessos, apenas o núcleo do produto.",
+    "pilar2Title": "2. Medir (Dados)",
+    "pilar2Desc": "Lançamos no mercado real. Coletamos métricas de uso, taxas de conversão e feedback genuíno de usuários reais, não apenas suposições.",
+    "pilar3Title": "3. Aprender (Iteração)",
+    "pilar3Desc": "Analisamos os resultados. Se falhar, matamos a ideia rápido e passamos para a próxima. Se validar, escalamos a infraestrutura e o negócio."
+  },
+  "BentoGrid": {
+    "heading": "O Laboratório.",
+    "description": "Nosso portfólio não é uma vitrine de clientes, é um registro de hipóteses testadas. Veja o que estamos rodando nos bastidores.",
+    "statusLabel": "[ status: {status} ]",
+    "openAria": "Abrir {title}",
+    "domoDescription": "App de gestão doméstica para famílias e grupos: dispensa compartilhada, lista de compras e organização da casa por membros.",
+    "domoStatus": "beta",
+    "dindinDescription": "Controle financeiro pessoal por 'caixinhas': receitas entram, são alocadas entre categorias e os gastos saem de cada uma.",
+    "dindinStatus": "ATIVO",
+    "forgeDescription": "Galeria dos agentes especializados do Forge (orquestrador + time), com prompt completo e busca ao vivo do repositório público.",
+    "forgeStatus": "em breve",
+    "mindDescription": "Base genérica de conhecimento pessoal versionado e integrado ao Claude Code — clone e monte a sua própria 'mente' de projetos.",
+    "mindStatus": "open source"
+  },
+  "Setores": {
+    "heading": "Nossa Infraestrutura.",
+    "description": "Um ecossistema completo. Desenvolvemos, testamos e escalamos soluções abrangendo as quatro frentes cruciais do mercado atual.",
+    "inTest": "Em teste",
+    "devTitle": "Desenvolvimento",
+    "devFocus": "Engenharia e Soluções Digitais",
+    "devActivity1": "Aplicações web e mobile",
+    "devActivity2": "Arquitetura de sistemas",
+    "devActivity3": "Automações e IA",
+    "ecommerceTitle": "E-commerce",
+    "ecommerceFocus": "Validação e Conversão",
+    "ecommerceActivity1": "Plataformas de vendas",
+    "ecommerceActivity2": "UX em fluxos de compra",
+    "ecommerceActivity3": "Esteiras de produtos",
+    "modaTitle": "Produção de Moda",
+    "modaFocus": "Design, Físico e Logística",
+    "modaActivity1": "Estampas minimalistas",
+    "modaActivity2": "Validação de fornecedores",
+    "modaActivity3": "Marcas de vestuário",
+    "marketingTitle": "Marketing",
+    "marketingFocus": "Crescimento e Comunidade",
+    "marketingActivity1": "Tráfego orgânico e pago",
+    "marketingActivity2": "Campanhas experimentais",
+    "marketingActivity3": "Posicionamento de marca"
+  },
+  "LanguageSwitcher": {
+    "label": "Idioma"
+  },
+  "ThemeToggle": {
+    "label": "Alternar tema"
+  }
+}
