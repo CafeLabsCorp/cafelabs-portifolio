@@ -2,53 +2,38 @@
 
 import { motion, Variants } from "framer-motion";
 import { Code2, ShoppingCart, Shirt, Megaphone } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const setoresData = [
   {
     icon: <Code2 className="w-8 h-8 mb-4 text-sandbox" />,
-    title: "Desenvolvimento",
-    focus: "Engenharia e Soluções Digitais",
-    activities: [
-      "Aplicações web e mobile",
-      "Arquitetura de sistemas",
-      "Automações e IA"
-    ],
+    titleKey: "devTitle",
+    focusKey: "devFocus",
+    activityKeys: ["devActivity1", "devActivity2", "devActivity3"],
     isLocked: false
   },
   {
     icon: <ShoppingCart className="w-8 h-8 mb-4 text-accent" />,
-    title: "E-commerce",
-    focus: "Validação e Conversão",
-    activities: [
-      "Plataformas de vendas",
-      "UX em fluxos de compra",
-      "Esteiras de produtos"
-    ],
+    titleKey: "ecommerceTitle",
+    focusKey: "ecommerceFocus",
+    activityKeys: ["ecommerceActivity1", "ecommerceActivity2", "ecommerceActivity3"],
     isLocked: true
   },
   {
-    icon: <Shirt className="w-8 h-8 mb-4 text-foreground/80" />, 
-    title: "Produção de Moda",
-    focus: "Design, Físico e Logística",
-    activities: [
-      "Estampas minimalistas",
-      "Validação de fornecedores",
-      "Marcas de vestuário"
-    ],
+    icon: <Shirt className="w-8 h-8 mb-4 text-foreground/80" />,
+    titleKey: "modaTitle",
+    focusKey: "modaFocus",
+    activityKeys: ["modaActivity1", "modaActivity2", "modaActivity3"],
     isLocked: true
   },
   {
     icon: <Megaphone className="w-8 h-8 mb-4 text-accent" />,
-    title: "Marketing",
-    focus: "Crescimento e Comunidade",
-    activities: [
-      "Tráfego orgânico e pago",
-      "Campanhas experimentais",
-      "Posicionamento de marca"
-    ],
+    titleKey: "marketingTitle",
+    focusKey: "marketingFocus",
+    activityKeys: ["marketingActivity1", "marketingActivity2", "marketingActivity3"],
     isLocked: true
   }
-];
+] as const;
 
 // Componente para animar os 3 pontinhos (...)
 const AnimatedDots = () => {
@@ -72,6 +57,8 @@ const AnimatedDots = () => {
 };
 
 export function Setores() {
+  const t = useTranslations("Setores");
+
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
@@ -85,17 +72,17 @@ export function Setores() {
   return (
     <section id="setores" className="w-full bg-foreground/[0.02] border-t border-borderUI py-24 sm:py-32">
       <div className="max-w-6xl mx-auto px-6">
-        
+
         <div className="text-center mb-16">
           <h2 className="font-poppins text-3xl md:text-5xl font-bold tracking-tight mb-4">
-            Nossa Infraestrutura.
+            {t("heading")}
           </h2>
           <p className="font-inter text-foreground/70 max-w-2xl mx-auto text-lg">
-            Um ecossistema completo. Desenvolvemos, testamos e escalamos soluções abrangendo as quatro frentes cruciais do mercado atual.
+            {t("description")}
           </p>
         </div>
 
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -103,8 +90,8 @@ export function Setores() {
           className="grid grid-cols-1 md:grid-cols-2 gap-6"
         >
           {setoresData.map((setor, index) => (
-            <motion.div 
-              key={index} 
+            <motion.div
+              key={index}
               variants={cardVariants}
               className="relative overflow-hidden p-8 rounded-3xl border border-borderUI bg-background"
             >
@@ -112,17 +99,17 @@ export function Setores() {
               <div className={`transition-all duration-300 ${setor.isLocked ? "blur-[6px] opacity-30 select-none pointer-events-none grayscale" : "hover:border-accent/30"}`}>
                 {setor.icon}
                 <h3 className="font-poppins text-2xl font-semibold mb-1">
-                  {setor.title}
+                  {t(setor.titleKey)}
                 </h3>
                 <p className="font-fira text-sm text-accent mb-6">
-                  // {setor.focus}
+                  // {t(setor.focusKey)}
                 </p>
-                
+
                 <ul className="space-y-3">
-                  {setor.activities.map((atividade, i) => (
-                    <li key={i} className="flex items-center gap-3 font-inter text-foreground/80">
+                  {setor.activityKeys.map((activityKey) => (
+                    <li key={activityKey} className="flex items-center gap-3 font-inter text-foreground/80">
                       <span className="w-1.5 h-1.5 rounded-full bg-borderUI" />
-                      {atividade}
+                      {t(activityKey)}
                     </li>
                   ))}
                 </ul>
@@ -133,7 +120,7 @@ export function Setores() {
                 <div className="absolute inset-0 flex items-center justify-center z-10 bg-background/5">
                   <div className="flex items-center font-fira text-sm font-medium text-foreground bg-background border border-borderUI px-4 py-2 rounded-full shadow-xl">
                     <span className="text-accent mr-2">{"[ "}</span>
-                    Em teste <AnimatedDots />
+                    {t("inTest")} <AnimatedDots />
                     <span className="text-accent ml-2">{" ]"}</span>
                   </div>
                 </div>

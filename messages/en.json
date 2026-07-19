@@ -1,0 +1,87 @@
+{
+  "Header": {
+    "navManifesto": "Manifesto",
+    "navLaboratorio": "Lab",
+    "navSetores": "Sectors",
+    "cta": "Grab a Coffee",
+    "logoAlt": "Café Labs logo",
+    "openMenu": "Open menu"
+  },
+  "Footer": {
+    "heading": "Got a hypothesis?",
+    "description": "Let's grab a coffee, sketch the architecture, and build your next MVP. Our testing machine never shuts down.",
+    "gmailAlt": "Gmail logo",
+    "ctaPrimary": "Start an Experiment",
+    "copyEmail": "Using another provider? Copy email",
+    "emailCopied": "Email copied successfully!",
+    "developedBy": "Built at Café Labs.",
+    "hostedOn": "Hosted on Vercel."
+  },
+  "Hero": {
+    "badge": "Sandbox_Active: v1.0",
+    "titleLine1": "Test. Build.",
+    "titleLine2": "Validate.",
+    "subtitle": "<strong>Café Labs</strong> is a multi-sector ecosystem where ideas become code, design, and product. We build agile MVPs to validate ideas before the coffee gets cold.",
+    "ctaPrimary": "See Experiments",
+    "ctaSecondary": "Understand the Model",
+    "scrollHint": "scroll to see more"
+  },
+  "Manifesto": {
+    "headingLine1": "The caffeine of",
+    "headingLine2": "agile innovation.",
+    "directive": "/* Operational Directive v1.0 */",
+    "paragraph1": "The traditional business model is slow and expensive. Café Labs works like a private incubator: a safe environment for failure, designed for fast wins.",
+    "paragraph2": "We don't write 50-page business plans. We build code, designs, and physical prototypes. We mix the welcoming energy of coffee with a lab's technical rigor to find out what actually has market value.",
+    "pilar1Title": "1. Build (MVP)",
+    "pilar1Desc": "We turn hypotheses into minimum viable versions with the lowest possible cost and time. No excess, just the core of the product.",
+    "pilar2Title": "2. Measure (Data)",
+    "pilar2Desc": "We launch to the real market. We collect usage metrics, conversion rates, and genuine feedback from real users, not just assumptions.",
+    "pilar3Title": "3. Learn (Iterate)",
+    "pilar3Desc": "We analyze the results. If it fails, we kill the idea fast and move to the next one. If it validates, we scale the infrastructure and the business."
+  },
+  "BentoGrid": {
+    "heading": "The Lab.",
+    "description": "Our portfolio isn't a client showcase, it's a record of tested hypotheses. See what we're running behind the scenes.",
+    "statusLabel": "[ status: {status} ]",
+    "openAria": "Open {title}",
+    "domoDescription": "Household management app for families and groups: shared pantry, shopping list, and home organization by member.",
+    "domoStatus": "beta",
+    "dindinDescription": "Personal finance control via 'envelopes': income comes in, gets allocated across categories, and expenses come out of each one.",
+    "dindinStatus": "ACTIVE",
+    "forgeDescription": "Gallery of Forge's specialized agents (orchestrator + team), with the full prompt and live search of the public repository.",
+    "forgeStatus": "coming soon",
+    "mindDescription": "Generic personal knowledge base, versioned and integrated with Claude Code — clone it and build your own project 'mind'.",
+    "mindStatus": "open source"
+  },
+  "Setores": {
+    "heading": "Our Infrastructure.",
+    "description": "A complete ecosystem. We develop, test, and scale solutions covering the four crucial fronts of today's market.",
+    "inTest": "In testing",
+    "devTitle": "Development",
+    "devFocus": "Engineering & Digital Solutions",
+    "devActivity1": "Web and mobile applications",
+    "devActivity2": "Systems architecture",
+    "devActivity3": "Automation and AI",
+    "ecommerceTitle": "E-commerce",
+    "ecommerceFocus": "Validation & Conversion",
+    "ecommerceActivity1": "Sales platforms",
+    "ecommerceActivity2": "UX in purchase flows",
+    "ecommerceActivity3": "Product pipelines",
+    "modaTitle": "Fashion Production",
+    "modaFocus": "Design, Physical & Logistics",
+    "modaActivity1": "Minimalist prints",
+    "modaActivity2": "Supplier validation",
+    "modaActivity3": "Apparel brands",
+    "marketingTitle": "Marketing",
+    "marketingFocus": "Growth & Community",
+    "marketingActivity1": "Organic and paid traffic",
+    "marketingActivity2": "Experimental campaigns",
+    "marketingActivity3": "Brand positioning"
+  },
+  "LanguageSwitcher": {
+    "label": "Language"
+  },
+  "ThemeToggle": {
+    "label": "Toggle theme"
+  }
+}
