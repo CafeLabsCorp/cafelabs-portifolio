@@ -1,10 +1,11 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { ArrowUpRight, Blocks, LucideIcon } from "lucide-react";
+import { ArrowUpRight, LucideIcon } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { MindLogo } from "@/components/ui/mind-logo";
+import { ForgeLogo } from "@/components/ui/forge-logo";
 
 // Os dados dos seus MVPs (Isso facilita muito a manutenção no futuro)
 const experimentos: {
@@ -42,7 +43,7 @@ const experimentos: {
   {
     id: 3,
     title: "Forge Skill Library",
-    icon: Blocks,
+    logoComponent: ForgeLogo,
     descriptionKey: "forgeDescription",
     statusKey: "forgeStatus",
     stack: ["Next.js", "TypeScript"],
