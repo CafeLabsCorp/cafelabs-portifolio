@@ -1,94 +1,96 @@
+**[Leia em Português](README.pt-br.md)**
+
 <div align="center">
   <img src="./public/logo_dark.svg" alt="Café Labs Logo" width="120" />
 
-  # Café Labs — Portifólio
+  # Café Labs — Portfolio
 
-  **Site institucional da Café Labs**
+  **Café Labs' institutional website**
 
-  Filtrando o ruído, extraindo a tecnologia pura e acelerando a validação do seu produto.
+  Filtering the noise, extracting the pure technology, and accelerating your product's validation.
 </div>
 
 ---
 
-## Sobre o projeto
+## About the project
 
-Este repositório é o site institucional da **Café Labs**, publicado em
-[cafelabs.net](https://cafelabs.net). É a landing da empresa (não de um produto
-específico): apresenta o manifesto/metodologia da Café Labs ("Testar.
-Construir. Validar.") e lista, no bloco "O Laboratório", todos os produtos do
-ecossistema (Domo, Dindin, Forge Skill Library, mind) como cards num bento
-grid, cada um linkando para a landing/site próprio daquele produto.
+This repository is the institutional website for **Café Labs**, published at
+[cafelabs.net](https://cafelabs.net). It's the company's landing page (not a
+specific product's): it presents Café Labs' manifesto/methodology ("Test.
+Build. Validate.") and lists every product in the ecosystem (Domo, Dindin,
+Forge Skill Library, mind) as cards in a bento grid, in the "O Laboratório"
+block, each one linking to that product's own landing/site.
 
-Para quem quer entender o negócio por trás do código, veja
-[docs/ARQUITETURA.md](docs/ARQUITETURA.md) para a estrutura técnica.
+For anyone who wants to understand the business behind the code, see
+[docs/ARQUITETURA.md](docs/ARQUITETURA.md) for the technical structure.
 
 ## Tech stack
 
-| Camada | Tecnologia |
+| Layer | Technology |
 | --- | --- |
 | Framework | Next.js 16 (App Router) |
-| Linguagem | TypeScript |
+| Language | TypeScript |
 | UI | React 19 |
-| Estilização | Tailwind CSS v4 |
-| Animações | Framer Motion |
-| Ícones | Lucide React + SVGs customizados próprios |
-| Tema claro/escuro | `next-themes` |
+| Styling | Tailwind CSS v4 |
+| Animations | Framer Motion |
+| Icons | Lucide React + custom SVGs |
+| Light/dark theme | `next-themes` |
 | Deploy | Vercel |
 
-## Pré-requisitos
+## Prerequisites
 
-- Node.js 20+ (testado com v20.20.1)
+- Node.js 20+ (tested with v20.20.1)
 - npm
 
-## Rodando localmente
+## Running locally
 
 ```bash
 npm install
 npm run dev
 ```
 
-Abre em [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000).
 
-Outros scripts disponíveis (`package.json`):
+Other available scripts (`package.json`):
 
-- `npm run build` — build de produção.
-- `npm run start` — serve o build de produção.
+- `npm run build` — production build.
+- `npm run start` — serves the production build.
 - `npm run lint` — ESLint (`eslint-config-next`, core-web-vitals + TypeScript).
 
-## Estrutura de pastas
+## Folder structure
 
 ```
 src/
   app/
-    layout.tsx        # RootLayout: fontes, ThemeProvider, Header/Footer fixos
+    layout.tsx        # RootLayout: fonts, ThemeProvider, fixed Header/Footer
     page.tsx           # Home: Hero + Manifesto + BentoGrid + Setores
-    globals.css        # Tokens de design (cores, fontes) via @theme do Tailwind v4
+    globals.css        # Design tokens (colors, fonts) via Tailwind v4's @theme
   components/
     layout/
-      header.tsx        # Nav fixa, logo condicional dark/light, menu mobile
-      hero.tsx           # Seção de abertura (100dvh) com CTAs
-      manifesto.tsx      # Metodologia Build/Measure/Learn
-      bento-grid.tsx     # Grid "O Laboratório" — cards dos produtos da Café Labs
-      setores.tsx        # Grid das 4 frentes de negócio (Dev, E-commerce, Moda, Marketing)
-      footer.tsx         # CTA de contato (e-mail) + copyright
+      header.tsx        # Fixed nav, conditional dark/light logo, mobile menu
+      hero.tsx           # Opening section (100dvh) with CTAs
+      manifesto.tsx      # Build/Measure/Learn methodology
+      bento-grid.tsx     # "O Laboratório" grid — Café Labs' product cards
+      setores.tsx        # Grid of the 4 business fronts (Dev, E-commerce, Fashion, Marketing)
+      footer.tsx         # Contact CTA (email) + copyright
     ui/
-      theme-toggle.tsx           # Botão de alternância claro/escuro
-      mind-logo.tsx               # Wordmark SVG do produto "mind"
-      logo-*.tsx                  # Conceitos de logo alternativos da Café Labs (não usados atualmente — ver docs/ARQUITETURA.md)
+      theme-toggle.tsx           # Light/dark theme toggle button
+      mind-logo.tsx               # "mind" product's SVG wordmark
+      logo-*.tsx                  # Alternative Café Labs logo concepts (not currently used — see docs/ARQUITETURA.md)
   providers/
-    theme-provider.tsx  # Wrapper de next-themes
+    theme-provider.tsx  # next-themes wrapper
 public/
-  logo_dark.svg / logo_light.svg   # Logo da Café Labs (Jarra-Erlenmeyer)
-  dindin-logo.svg / domo-logo.svg  # Logos dos produtos usados no bento grid
+  logo_dark.svg / logo_light.svg   # Café Labs logo (Jarra-Erlenmeyer)
+  dindin-logo.svg / domo-logo.svg  # Product logos used in the bento grid
 ```
 
-## Documentação
+## Documentation
 
-- [docs/ARQUITETURA.md](docs/ARQUITETURA.md) — estrutura de páginas/componentes, como o bento grid funciona e como adicionar um novo produto.
-- [docs/DESIGN.md](docs/DESIGN.md) — identidade visual: paleta, tipografia, tokens.
-- [docs/DEPLOY.md](docs/DEPLOY.md) — deploy na Vercel, domínio.
-- [CLAUDE.md](CLAUDE.md) — notas para quem usa um agente de IA neste repo.
+- [docs/ARQUITETURA.md](docs/ARQUITETURA.md) — page/component structure, how the bento grid works, and how to add a new product.
+- [docs/DESIGN.md](docs/DESIGN.md) — visual identity: palette, typography, tokens.
+- [docs/DEPLOY.md](docs/DEPLOY.md) — Vercel deploy, domain.
+- [CLAUDE.md](CLAUDE.md) — notes for anyone using an AI agent in this repo.
 
-Este projeto não tem backend próprio — é um site estático/SSR sem persistência
-de dados (os "produtos" listados no bento grid são links externos para seus
-próprios repos/deploys).
+This project has no backend of its own — it's a static/SSR site with no data
+persistence (the "products" listed in the bento grid are external links to
+their own repos/deploys).

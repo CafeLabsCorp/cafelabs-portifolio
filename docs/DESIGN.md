@@ -1,80 +1,84 @@
-# Design — Identidade Visual Café Labs
+**[Leia em Português](DESIGN.pt-br.md)**
 
-Identidade institucional da Café Labs (distinta da identidade de cada produto
-— Domo e Dindin têm paleta/tipografia próprias documentadas em seus próprios
-repos). Nome da identidade: **Jarra-Erlenmeyer** — fusão do frasco de
-laboratório (Erlenmeyer) com o café, representando o conceito de "sandbox de
-testes" da empresa.
+# Design — Café Labs Visual Identity
 
-Todos os tokens abaixo são lidos diretamente de `src/app/globals.css` e
-`tailwind.config.ts` — não são valores aproximados.
+Café Labs' institutional identity (distinct from each product's identity —
+Domo and Dindin have their own palette/typography documented in their own
+repos). Identity name: **Jarra-Erlenmeyer** ("Erlenmeyer Jar") — a fusion of
+the lab flask (Erlenmeyer) with coffee, representing the company's "testing
+sandbox" concept.
 
-## Como os tokens são expostos
+All tokens below are read directly from `src/app/globals.css` and
+`tailwind.config.ts` — they are not approximate values.
 
-`globals.css` define as variáveis CSS cruas em `@layer base` (uma vez para o
-tema claro em `:root`, sobrescritas em `.dark` para o tema escuro) e depois as
-mapeia para nomes semânticos dentro de um bloco `@theme` do Tailwind v4 — é
-esse bloco que gera automaticamente as classes utilitárias (`bg-background`,
-`text-accent`, `border-borderUI`, etc.) usadas em todos os componentes.
-`tailwind.config.ts` espelha o mesmo mapeamento (redundante com o `@theme`,
-mantido por compatibilidade com Tailwind v3-style config).
+## How the tokens are exposed
 
-Alternância de tema via `next-themes` (`attribute="class"`), aplicando/
-removendo a classe `.dark` no `<html>`.
+`globals.css` defines the raw CSS variables in `@layer base` (once for the
+light theme in `:root`, overridden in `.dark` for the dark theme) and then
+maps them to semantic names inside a Tailwind v4 `@theme` block — that block
+is what automatically generates the utility classes (`bg-background`,
+`text-accent`, `border-borderUI`, etc.) used across every component.
+`tailwind.config.ts` mirrors the same mapping (redundant with `@theme`, kept
+for compatibility with Tailwind v3-style config).
 
-## Paleta de cores
+Theme switching happens via `next-themes` (`attribute="class"`), adding/
+removing the `.dark` class on `<html>`.
 
-| Token semântico (classe Tailwind) | Variável CSS | Claro | Escuro |
+## Color palette
+
+| Semantic token (Tailwind class) | CSS variable | Light | Dark |
 | --- | --- | --- | --- |
 | `bg-background` | `--bg-principal` | `#FFFBF7` | `#161414` |
 | `text-foreground` | `--texto-principal` | `#231F20` | `#F5EFEB` |
-| `text-accent` / `border-accent` | `--marca-accent` | `#FF5411` (Laranja Elétrico) | `#FF5411` (fixo, não varia por tema) |
-| `text-sandbox` / `bg-sandbox` | `--verde-sandbox` | `#00E699` | `#00E699` (fixo, não varia por tema) |
+| `text-accent` / `border-accent` | `--marca-accent` | `#FF5411` (Electric Orange) | `#FF5411` (fixed, doesn't vary by theme) |
+| `text-sandbox` / `bg-sandbox` | `--verde-sandbox` | `#00E699` | `#00E699` (fixed, doesn't vary by theme) |
 | `border-borderUI` | `--borda-sutil` | `#E5E0DA` | `#2A2626` |
 
-- **Laranja Elétrico (`#FF5411`)** — cor de marca/ação: CTAs, links ativos,
-  destaques de título ("Validar." no Hero), glow de fundo da Hero
-  (`bg-accent/20` com blur).
-- **Verde Sandbox (`#00E699`)** — usado para indicadores de status "ativo"
-  (badge piscante na Hero, badges de status nos cards do bento grid) e
-  confirmações (ex.: "E-mail copiado com sucesso!" no Footer).
-- Fundo e texto se invertem entre os temas; a cor de marca e o verde de status
-  **não mudam** entre claro/escuro — são as únicas cores fixas da paleta.
+- **Electric Orange (`#FF5411`)** — brand/action color: CTAs, active links,
+  headline highlights ("Validar." in the Hero), Hero background glow
+  (`bg-accent/20` with blur).
+- **Sandbox Green (`#00E699`)** — used for "active" status indicators (the
+  pulsing badge in the Hero, status badges on bento grid cards) and
+  confirmations (e.g. "E-mail copiado com sucesso!" in the Footer).
+- Background and text invert between themes; the brand color and the status
+  green **do not change** between light/dark — they're the only fixed colors
+  in the palette.
 
-## Tipografia
+## Typography
 
-| Token (classe Tailwind) | Fonte | Uso |
+| Token (Tailwind class) | Font | Usage |
 | --- | --- | --- |
-| `font-poppins` | Poppins (pesos 400/600/700/900, via `next/font/google`) | Headings, logotipo, títulos de seção, CTAs |
-| `font-inter` | Inter (via `next/font/google`) | Corpo de texto, UI, navegação — fonte padrão do `<body>` |
-| `font-fira` | Fira Code (via `next/font/google`, variável `--font-fira-code`) | Elementos "estilo terminal": badges de status (`[ status: ativo ]`), tags de stack tecnológica, comentários decorativos (`/* Diretriz Operacional v1.0 */`), copyright do rodapé |
+| `font-poppins` | Poppins (weights 400/600/700/900, via `next/font/google`) | Headings, logotype, section titles, CTAs |
+| `font-inter` | Inter (via `next/font/google`) | Body text, UI, navigation — the `<body>`'s default font |
+| `font-fira` | Fira Code (via `next/font/google`, `--font-fira-code` variable) | "Terminal style" elements: status badges (`[ status: ativo ]`), technology stack tags, decorative comments (`/* Diretriz Operacional v1.0 */`), footer copyright |
 
-## Espaçamento e forma
+## Spacing and shape
 
-- Container padrão de conteúdo: `max-w-6xl mx-auto px-6`.
-- Seções verticais generosas: `py-24 sm:py-32`.
-- Cards com raio grande (`rounded-3xl`) e borda sutil (`border-borderUI`) —
-  visual de "cartão de laboratório", consistente entre bento grid e setores.
-- Botões primários em pílula (`rounded-full`), com `hover:scale-105`.
+- Standard content container: `max-w-6xl mx-auto px-6`.
+- Generous vertical sections: `py-24 sm:py-32`.
+- Cards with large radius (`rounded-3xl`) and a subtle border
+  (`border-borderUI`) — a "lab card" look, consistent across the bento grid
+  and the setores section.
+- Pill-shaped primary buttons (`rounded-full`), with `hover:scale-105`.
 
-## Logotipo
+## Logo
 
-- Arquivo principal: `public/logo_dark.svg` / `public/logo_light.svg` — trocado
-  dinamicamente pelo `Header` conforme `resolvedTheme`.
-- Favicon segue a mesma lógica via `media: prefers-color-scheme` no
-  `metadata.icons` de `src/app/layout.tsx`.
-- Um conjunto de conceitos alternativos de logo existe em
-  `src/components/ui/logo-*.tsx` (não usado atualmente na UI — ver
-  `docs/ARQUITETURA.md`).
+- Main file: `public/logo_dark.svg` / `public/logo_light.svg` — swapped
+  dynamically by `Header` based on `resolvedTheme`.
+- The favicon follows the same logic via `media: prefers-color-scheme` in
+  `metadata.icons` in `src/app/layout.tsx`.
+- A set of alternative logo concepts lives in `src/components/ui/logo-*.tsx`
+  (not currently used in the UI — see `docs/ARQUITETURA.md`).
 
-## Acessibilidade / motion
+## Accessibility / motion
 
-- `scroll-behavior: smooth` no `html`, desligado sob
-  `@media (prefers-reduced-motion: reduce)` (volta para `auto`) —
-  em conformidade com o padrão estrutural de landing pages da Café Labs
-  (ver nó `cafelabs/padroes-landing.md` no Mind, se disponível).
-- Indicadores animados (badge pulsante da Hero, seta de scroll) usam
-  `motion-safe:animate-bounce` / equivalentes do Framer Motion, mas
-  `TODO: confirmar` se todas as animações Framer Motion do repo respeitam
-  `prefers-reduced-motion` — não foi encontrado um guard explícito para as
-  transições `whileInView` do bento grid e do manifesto além do `scroll-behavior`.
+- `scroll-behavior: smooth` on `html`, turned off under
+  `@media (prefers-reduced-motion: reduce)` (falls back to `auto`) —
+  consistent with Café Labs' structural landing page standard (see the
+  `cafelabs/padroes-landing.md` node in the Mind, if available).
+- Animated indicators (the Hero's pulsing badge, the scroll arrow) use
+  `motion-safe:animate-bounce` / Framer Motion equivalents, but
+  `TODO: confirmar` whether every Framer Motion animation in the repo
+  respects `prefers-reduced-motion` — no explicit guard was found for the
+  bento grid's and manifesto's `whileInView` transitions beyond
+  `scroll-behavior`.

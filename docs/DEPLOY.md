@@ -1,63 +1,65 @@
+**[Leia em Português](DEPLOY.pt-br.md)**
+
 # Deploy
 
-## Onde roda
+## Where it runs
 
 - **Hosting**: Vercel.
-- **Domínio de produção**: [cafelabs.net](https://cafelabs.net) (site
-  institucional da Café Labs).
-- **Repositório**: `CafeLabsDev/cafelabs-portifolio` no GitHub
-  (`git remote -v` confirma `origin` apontando para
+- **Production domain**: [cafelabs.net](https://cafelabs.net) (Café Labs'
+  institutional site).
+- **Repository**: `CafeLabsDev/cafelabs-portifolio` on GitHub
+  (`git remote -v` confirms `origin` pointing to
   `https://github.com/CafeLabsDev/cafelabs-portifolio.git`).
 
-Não há arquivo `vercel.json` neste repo nem workflow de CI próprio
-(`.github/workflows` não existe) — o projeto não define pipeline customizado.
-`TODO: confirmar` a configuração exata do projeto no painel da Vercel (build
-command, variáveis de ambiente, se houver), já que não é observável a partir
-do código-fonte.
+There's no `vercel.json` file in this repo, nor a CI workflow of its own
+(`.github/workflows` doesn't exist) — the project doesn't define a custom
+pipeline. `TODO: confirmar` the exact project configuration in the Vercel
+dashboard (build command, environment variables, if any), since it's not
+observable from the source code.
 
-## Pipeline (inferido do padrão Vercel + GitHub)
+## Pipeline (inferred from the standard Vercel + GitHub pattern)
 
-Este projeto segue o modelo padrão de integração Git da Vercel, sem passo de
-CI/CD customizado neste repositório:
+This project follows Vercel's standard Git integration model, with no
+custom CI/CD step in this repository:
 
-1. Push/merge para `main` no GitHub → Vercel detecta o commit via integração
-   Git e dispara um novo build automaticamente.
-2. Build: `npm install` + `next build` (comando padrão de projeto Next.js na
-   Vercel; não há override em `vercel.json`).
-3. Deploy automático do resultado para o domínio de produção
-   (`cafelabs.net`) assim que o build passa.
-4. Pull requests (quando existirem) recebem Preview Deployments automáticos
-   da Vercel, em domínio único por PR — comportamento padrão da plataforma,
-   não configuração específica deste repo.
+1. Push/merge to `main` on GitHub → Vercel detects the commit via the Git
+   integration and automatically triggers a new build.
+2. Build: `npm install` + `next build` (the standard command for a Next.js
+   project on Vercel; no override in `vercel.json`).
+3. Automatic deploy of the result to the production domain (`cafelabs.net`)
+   as soon as the build passes.
+4. Pull requests (when they exist) get automatic Vercel Preview Deployments,
+   on a per-PR domain — this is the platform's default behavior, not a
+   repo-specific configuration.
 
-`TODO: confirmar`: não há evidência no repo de que Preview Deployments
-estejam de fato habilitados/usados no fluxo de trabalho atual — o projeto
-trabalha direto em `main` sem branches de feature (ver `.gitignore`/`git log`:
-único branch é `main`), então na prática o fluxo observado é
-"push em `main` → build → deploy em produção", sem etapa de preview.
+`TODO: confirmar`: there's no evidence in the repo that Preview Deployments
+are actually enabled/used in the current workflow — the project works
+directly on `main` with no feature branches (see `.gitignore`/`git log`: the
+only branch is `main`), so in practice the observed flow is
+"push to `main` → build → deploy to production", with no preview step.
 
-## Ambientes
+## Environments
 
-Não há separação entre ambiente de staging e produção configurada neste
-repo — um único ambiente (produção, `cafelabs.net`), sem arquivo `.env`
-versionado (`.env*` está no `.gitignore`) e sem variáveis de ambiente
-detectadas no código (`next.config.ts` está vazio, sem `env`/`publicRuntimeConfig`).
+There's no staging/production environment split configured in this repo — a
+single environment (production, `cafelabs.net`), no versioned `.env` file
+(`.env*` is in `.gitignore`), and no environment variables detected in the
+code (`next.config.ts` is empty, with no `env`/`publicRuntimeConfig`).
 
-## Domínio / DNS
+## Domain / DNS
 
-- Domínio raiz `cafelabs.net` aponta para este deploy Vercel.
-- Os demais produtos da Café Labs usam subdomínios próprios
+- The root domain `cafelabs.net` points to this Vercel deploy.
+- Other Café Labs products use their own subdomains
   (`dindin.cafelabs.net`, `domo.cafelabs.net`, `forge.cafelabs.net`,
-  `mind.cafelabs.net`), cada um com seu próprio deploy/repo — este projeto
-  apenas linka para eles a partir do bento grid (`docs/ARQUITETURA.md`), não
-  os hospeda.
-- `TODO: confirmar` detalhes de configuração de DNS (registrador, registros
-  exatos) — não são observáveis a partir deste repositório.
+  `mind.cafelabs.net`), each with its own deploy/repo — this project only
+  links to them from the bento grid (`docs/ARQUITETURA.md`), it doesn't host
+  them.
+- `TODO: confirmar` DNS configuration details (registrar, exact records) —
+  not observable from this repository.
 
 ## Rollback
 
-Não há mecanismo de rollback customizado neste repo. Em caso de deploy
-quebrado, o caminho padrão é usar o painel da Vercel para "promote" um
-deployment anterior a produção, ou reverter o commit problemático em `main`
-via Git (`git revert`) para disparar um novo build automático.
-`TODO: confirmar` se esse é de fato o processo seguido na prática.
+There's no custom rollback mechanism in this repo. If a deploy breaks, the
+standard path is to use the Vercel dashboard to "promote" a previous
+deployment to production, or revert the problematic commit on `main` via
+Git (`git revert`) to trigger a new automatic build.
+`TODO: confirmar` whether this is actually the process followed in practice.

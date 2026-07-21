@@ -1,38 +1,41 @@
-# Arquitetura
+**[Leia em Português](ARQUITETURA.pt-br.md)**
 
-Site institucional da Café Labs. Next.js App Router, uma única rota (`/`),
-sem backend próprio — é conteúdo estático/SSR client-rendered, sem
-persistência de dados nem chamadas a API.
+# Architecture
 
-## Camadas
+Café Labs institutional website. Next.js App Router, a single route (`/`),
+no backend of its own — it's static/SSR client-rendered content, with no
+data persistence and no API calls.
+
+## Layers
 
 ```
-src/app/layout.tsx   → RootLayout: carrega fontes, monta ThemeProvider, Header/Footer fixos em toda página
-src/app/page.tsx     → única rota: compõe as 4 seções da home, em ordem
-src/components/layout/  → uma seção de página cada (client components)
-src/components/ui/      → peças pequenas reutilizáveis (toggle de tema, logos SVG)
-src/providers/           → wrapper de contexto (tema)
+src/app/layout.tsx   → RootLayout: loads fonts, sets up ThemeProvider, fixed Header/Footer on every page
+src/app/page.tsx     → the only route: composes the 4 sections of the home page, in order
+src/components/layout/  → one page section each (client components)
+src/components/ui/      → small reusable pieces (theme toggle, SVG logos)
+src/providers/           → context wrapper (theme)
 ```
 
-Não há roteamento além da home — `src/app/page.tsx` é a única página, e a
-navegação do Header (`Manifesto`, `Laboratório`, `Setores`) é scroll suave para
-âncoras (`#manifesto`, `#laboratorio`, `#setores`) dentro da mesma página, não
-rotas separadas.
+There's no routing beyond the home page — `src/app/page.tsx` is the only
+page, and the Header navigation (`Manifesto`, `Laboratório`, `Setores`) is
+smooth-scroll to anchors (`#manifesto`, `#laboratorio`, `#setores`) within the
+same page, not separate routes.
 
 ### `layout.tsx` — RootLayout
 
-- Carrega 3 fontes do Google via `next/font`: Inter (`--font-inter`, corpo/UI),
+- Loads 3 Google fonts via `next/font`: Inter (`--font-inter`, body/UI),
   Poppins (`--font-poppins`, headings/logo), Fira Code (`--font-fira-code`,
-  texto estilo "código"/tags de status).
-- Envolve tudo em `ThemeProvider` (`next-themes`, `attribute="class"`,
-  `defaultTheme="system"`), o que habilita a classe `.dark` usada em
+  "code style" text/status tags).
+- Wraps everything in `ThemeProvider` (`next-themes`, `attribute="class"`,
+  `defaultTheme="system"`), which enables the `.dark` class used in
   `globals.css`.
-- `Header` e `Footer` ficam fora de `{children}` mas dentro do `ThemeProvider`
-  — aparecem em qualquer página que existisse, mesmo havendo só uma hoje.
+- `Header` and `Footer` sit outside `{children}` but inside `ThemeProvider`
+  — they'd appear on any page that existed, even though there's only one
+  today.
 
 ### `page.tsx` — Home
 
-Composição simples, em ordem de scroll:
+Simple composition, in scroll order:
 
 ```tsx
 <Hero />
@@ -41,102 +44,103 @@ Composição simples, em ordem de scroll:
 <Setores />
 ```
 
-(O `Footer` não está aqui — vem do `layout.tsx`.)
+(`Footer` isn't here — it comes from `layout.tsx`.)
 
-## Componentes de `layout/`
+## `layout/` components
 
-| Componente | Seção / âncora | O que faz |
+| Component | Section / anchor | What it does |
 | --- | --- | --- |
-| `header.tsx` | fixo, sempre visível | Nav com scroll suave para as âncoras, logo condicional (troca `logo_dark.svg`/`logo_light.svg` conforme `resolvedTheme`), menu mobile (hambúrguer), `ThemeToggle`, CTA "Tomar um Café" → `#contato`. |
-| `hero.tsx` | topo, sem âncora própria | Seção de abertura, `min-h-dvh` (tela cheia). Título + 2 CTAs (`#laboratorio`, `#manifesto`) e indicador de scroll animado no rodapé da seção. |
-| `manifesto.tsx` | `#manifesto` | Duas colunas: texto do manifesto à esquerda, os 3 pilares da metodologia (Construir/Medir/Aprender) à direita. |
-| `bento-grid.tsx` | `#laboratorio` | Grid "O Laboratório" — ver seção dedicada abaixo. |
-| `setores.tsx` | `#setores` | Grid 2 colunas com as 4 frentes de negócio da Café Labs (Desenvolvimento ativo; E-commerce, Moda e Marketing marcados como `isLocked: true`, exibidos com blur + selo "Em teste"). |
-| `footer.tsx` | `#contato` | CTA de contato: detecta mobile via `navigator.userAgent` pra decidir entre `mailto:` (mobile) ou link direto do Gmail web (desktop); botão secundário copia o e-mail para a área de transferência. Copyright e links para `cafelabs.net`/`cafelabs.net.br`. |
+| `header.tsx` | fixed, always visible | Nav with smooth-scroll to the anchors, conditional logo (swaps `logo_dark.svg`/`logo_light.svg` based on `resolvedTheme`), mobile menu (hamburger), `ThemeToggle`, "Tomar um Café" CTA → `#contato`. |
+| `hero.tsx` | top, no anchor of its own | Opening section, `min-h-dvh` (full screen). Title + 2 CTAs (`#laboratorio`, `#manifesto`) and an animated scroll indicator at the bottom of the section. |
+| `manifesto.tsx` | `#manifesto` | Two columns: manifesto text on the left, the 3 pillars of the methodology (Build/Measure/Learn) on the right. |
+| `bento-grid.tsx` | `#laboratorio` | "O Laboratório" grid — see the dedicated section below. |
+| `setores.tsx` | `#setores` | 2-column grid with Café Labs' 4 business fronts (Development active; E-commerce, Fashion and Marketing marked as `isLocked: true`, shown blurred with an "Em teste" badge). |
+| `footer.tsx` | `#contato` | Contact CTA: detects mobile via `navigator.userAgent` to decide between `mailto:` (mobile) or a direct Gmail web link (desktop); a secondary button copies the email to the clipboard. Copyright and links to `cafelabs.net`/`cafelabs.net.br`. |
 
-## O bento grid (`bento-grid.tsx`)
+## The bento grid (`bento-grid.tsx`)
 
-É o mecanismo que lista os produtos da Café Labs como cards clicáveis — o
-principal ponto de integração deste repo com o resto do ecossistema.
+This is the mechanism that lists Café Labs' products as clickable cards — the
+main integration point between this repo and the rest of the ecosystem.
 
-- **Fonte de dados**: array `experimentos` hardcoded no topo do arquivo
-  (não vem de CMS/API). Cada item:
+- **Data source**: a hardcoded `experimentos` array at the top of the file
+  (not sourced from a CMS/API). Each item:
 
   ```ts
   {
     id: number,
     title: string,
-    logo?: string,              // caminho em /public, renderizado via next/image
-    logoComponent?: React.ComponentType,  // ex.: MindLogo, componente SVG inline
-    icon?: LucideIcon,           // fallback quando o produto não tem logo próprio ainda
+    logo?: string,              // path under /public, rendered via next/image
+    logoComponent?: React.ComponentType,  // e.g. MindLogo, an inline SVG component
+    icon?: LucideIcon,           // fallback when the product doesn't have its own logo yet
     description: string,
-    status: string,              // texto livre exibido como "[ status: X ]"
-    stack: string[],              // badges de tecnologia no rodapé do card
-    span: string,                 // classe Tailwind de col-span (controla o tamanho do card no grid)
-    link?: string,                // URL externa do produto (torna o card inteiro clicável)
+    status: string,              // free text shown as "[ status: X ]"
+    stack: string[],              // technology badges at the bottom of the card
+    span: string,                 // Tailwind col-span class (controls the card's size in the grid)
+    link?: string,                // the product's external URL (makes the whole card clickable)
   }
   ```
 
 - **Layout**: `grid grid-cols-1 md:grid-cols-3 auto-rows-[minmax(250px,auto)]`.
-  Cada card define seu próprio `span` (ex.: `md:col-span-2` para o Domo, que
-  ocupa destaque duplo; `md:col-span-1` para os demais) — é assim que o bento
-  grid varia o tamanho dos cards em vez de todos serem iguais.
-- **Card clicável inteiro**: quando existe `link`, um `<a>` absoluto
-  (`inset-0 z-10`) cobre o card todo; o conteúdo visual fica por baixo.
-- **Animação**: Framer Motion com stagger (`containerVariants` /
-  `cardVariants`), disparada via `whileInView` (anima ao entrar no viewport,
-  uma vez só — `viewport={{ once: true }}`).
-- **Logo do card**: prioridade `logo` (imagem em `/public`) → `logoComponent`
-  (componente React, ex. `MindLogo`) → `icon` (ícone genérico Lucide, usado
-  para produtos que ainda não têm identidade visual própria, ex. Forge Skill
-  Library com o ícone `Blocks`).
+  Each card sets its own `span` (e.g. `md:col-span-2` for Domo, which gets a
+  double-wide highlight; `md:col-span-1` for the rest) — that's how the bento
+  grid varies card size instead of making them all equal.
+- **Whole card clickable**: when `link` is present, an absolutely positioned
+  `<a>` (`inset-0 z-10`) covers the entire card; the visual content sits
+  underneath.
+- **Animation**: Framer Motion with stagger (`containerVariants` /
+  `cardVariants`), triggered via `whileInView` (animates when it enters the
+  viewport, only once — `viewport={{ once: true }}`).
+- **Card logo**: priority is `logo` (image under `/public`) → `logoComponent`
+  (React component, e.g. `MindLogo`) → `icon` (generic Lucide icon, used for
+  products that don't have their own visual identity yet, e.g. Forge Skill
+  Library with the `Blocks` icon).
 
-### Produtos atualmente listados (estado do array em `bento-grid.tsx`)
+### Products currently listed (state of the array in `bento-grid.tsx`)
 
-1. **Domo** — logo própria (`/domo-logo.svg`), `span md:col-span-2`, link
+1. **Domo** — own logo (`/domo-logo.svg`), `span md:col-span-2`, link
    `https://domo.cafelabs.net`.
-2. **Dindin** — logo própria (`/dindin-logo.svg`), link
+2. **Dindin** — own logo (`/dindin-logo.svg`), link
    `https://dindin.cafelabs.net`.
-3. **Forge Skill Library** — sem logo própria ainda, ícone `Blocks` (Lucide),
+3. **Forge Skill Library** — no own logo yet, `Blocks` icon (Lucide),
    link `https://forge.cafelabs.net`.
-4. **mind** — `MindLogo` (componente SVG em `src/components/ui/mind-logo.tsx`),
+4. **mind** — `MindLogo` (SVG component in `src/components/ui/mind-logo.tsx`),
    link `https://mind.cafelabs.net`.
 
-### Como adicionar um novo produto ao Laboratório
+### How to add a new product to Laboratório
 
-1. Se o produto tem logo própria, colocar o SVG em `public/` (padrão de nome:
-   `<produto>-logo.svg`, seguindo `dindin-logo.svg`/`domo-logo.svg`).
-2. Adicionar um objeto ao array `experimentos` em
-   `src/components/layout/bento-grid.tsx`, com `logo` (ou `logoComponent`/
-   `icon` como fallback), `link` para a landing/repo do produto, e `span`
-   conforme o destaque desejado no grid.
-3. Não há passo de build adicional — o grid renderiza o array diretamente.
+1. If the product has its own logo, drop the SVG into `public/` (naming
+   pattern: `<product>-logo.svg`, following `dindin-logo.svg`/`domo-logo.svg`).
+2. Add an object to the `experimentos` array in
+   `src/components/layout/bento-grid.tsx`, with `logo` (or `logoComponent`/
+   `icon` as fallback), `link` to the product's landing/repo, and `span`
+   according to the desired grid emphasis.
+3. There's no extra build step — the grid renders the array directly.
 
-Cross-referência: o Mind (base de conhecimento pessoal do autor) mantém em
-`cafelabs/cafelabs.md` e `projetos/produtos-cafelabs/cafelabs-portifolio.md`
-o registro de quais produtos este repo referencia e por quê — relevante para
-quem for entender o contexto de negócio por trás dos links, mas não é
-necessário para trabalhar no código.
+Cross-reference: the Mind (the author's personal knowledge base) keeps a
+record in `cafelabs/cafelabs.md` and
+`projetos/produtos-cafelabs/cafelabs-portifolio.md` of which products this
+repo references and why — relevant for understanding the business context
+behind the links, but not required for working on the code.
 
 ## `ui/logo-*.tsx`
 
-Um conjunto de componentes SVG (`logo-anel`, `logo-bloco`, `logo-centelha`,
+A set of SVG components (`logo-anel`, `logo-bloco`, `logo-centelha`,
 `logo-chemex`, `logo-cubocl`, `logo-erlenmeier-cafeteira`, `logo-erlenmeyer`,
 `logo-fluxo`, `logo-grao`, `logo-matriz`, `logo-nucleo`, `logo-orbital`,
-`logo-xicara`) — conceitos alternativos de logotipo da Café Labs explorados
-durante o design da marca. Nenhum é importado ativamente hoje;
-`header.tsx` só referencia essas variantes dentro de um bloco de código
-comentado no final do arquivo (linhas 149+), mantido como registro histórico
-das opções descartadas em favor da logo atual (Jarra-Erlenmeyer, em
+`logo-xicara`) — alternative Café Labs logo concepts explored during brand
+design. None of them is actively imported today; `header.tsx` only
+references these variants inside a commented-out code block at the end of
+the file (lines 149+), kept as a historical record of the options discarded
+in favor of the current logo (Jarra-Erlenmeyer, in
 `logo_dark.svg`/`logo_light.svg`).
 
-`TODO: confirmar` — não está documentado em nenhum commit por que essas
-variantes foram mantidas no repo em vez de removidas; se forem lixo morto,
-vale limpar numa próxima passada.
+`TODO: confirmar` — no commit documents why these variants were kept in the
+repo instead of removed; if they're dead weight, worth cleaning up in a
+future pass.
 
 ## `src/app/page.module.css`
 
-Arquivo CSS Module remanescente do boilerplate padrão do `create-next-app`
-(estilos da página de exemplo). Não é importado por nenhum componente ativo
-(`page.tsx` não o referencia) — parece resíduo do scaffold inicial do
-projeto. `TODO: confirmar` se pode ser removido com segurança.
+A leftover CSS Module file from the standard `create-next-app` boilerplate
+(sample page styles). It isn't imported by any active component (`page.tsx`
+doesn't reference it) — looks like a residue from the project's initial
+scaffold. `TODO: confirmar` whether it can be safely removed.
