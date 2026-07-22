@@ -7,9 +7,9 @@
 - **Hosting**: Vercel.
 - **Domínio de produção**: [cafelabs.net](https://cafelabs.net) (site
   institucional da Café Labs).
-- **Repositório**: `CafeLabsDev/cafelabs-portifolio` no GitHub
+- **Repositório**: `CafeLabsCorp/cafelabs-portifolio` no GitHub
   (`git remote -v` confirma `origin` apontando para
-  `https://github.com/CafeLabsDev/cafelabs-portifolio.git`).
+  `https://github.com/CafeLabsCorp/cafelabs-portifolio.git`).
 
 Não há arquivo `vercel.json` neste repo nem workflow de CI próprio
 (`.github/workflows` não existe) — o projeto não define pipeline customizado.
@@ -37,6 +37,16 @@ estejam de fato habilitados/usados no fluxo de trabalho atual — o projeto
 trabalha direto em `main` sem branches de feature (ver `.gitignore`/`git log`:
 único branch é `main`), então na prática o fluxo observado é
 "push em `main` → build → deploy em produção", sem etapa de preview.
+
+`TODO: confirmar`: em 2026-07-23, os deploys automáticos da Vercel pararam
+de disparar no push pra este projeto e os outros 4 sites da Café Labs
+hospedados na Vercel sob a org `CafeLabsCorp`, exigindo deploy manual no dia
+anterior — causa raiz não confirmada até essa data (candidatos em
+investigação: a instalação/acesso do GitHub App da Vercel na `CafeLabsCorp`,
+ou uma política de Third-party Access mais restritiva na org). Não é
+observável a partir deste repo; verificar o painel da Vercel/configurações
+do GitHub App antes de assumir que o fluxo "push → build automático" acima
+está funcionando de ponta a ponta atualmente.
 
 ## Ambientes
 

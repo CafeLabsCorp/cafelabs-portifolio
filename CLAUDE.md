@@ -16,3 +16,10 @@ Sem backend próprio (sem `docs/BACKEND.md`).
 - Ao adicionar um novo produto ao bento grid (`src/components/layout/bento-grid.tsx`),
   o link deve apontar para a landing/repo próprio daquele produto, não para
   este repo — este projeto não hospeda os produtos, só os lista.
+- Todo texto de UI vem de `messages/en.json`/`messages/pt.json` (via
+  `next-intl`) — ao adicionar ou mudar uma chave, edite **os dois** arquivos
+  na mesma passada; esquecer um deles quebra o render daquele idioma em
+  produção.
+- Mudanças futuras significativas neste projeto (nova seção, novo fluxo,
+  refatoração maior) devem passar pelo Forge (o time de agentes especializados
+  do repo `forge`) em vez de serem feitas ad-hoc por um agente avulso aqui.

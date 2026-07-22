@@ -8,7 +8,7 @@ repos). Identity name: **Jarra-Erlenmeyer** ("Erlenmeyer Jar") — a fusion of
 the lab flask (Erlenmeyer) with coffee, representing the company's "testing
 sandbox" concept.
 
-All tokens below are read directly from `src/app/globals.css` and
+All tokens below are read directly from `src/app/[locale]/globals.css` and
 `tailwind.config.ts` — they are not approximate values.
 
 ## How the tokens are exposed
@@ -66,7 +66,7 @@ removing the `.dark` class on `<html>`.
 - Main file: `public/logo_dark.svg` / `public/logo_light.svg` — swapped
   dynamically by `Header` based on `resolvedTheme`.
 - The favicon follows the same logic via `media: prefers-color-scheme` in
-  `metadata.icons` in `src/app/layout.tsx`.
+  `metadata.icons` in `src/app/[locale]/layout.tsx`.
 - A set of alternative logo concepts lives in `src/components/ui/logo-*.tsx`
   (not currently used in the UI — see `docs/ARQUITETURA.md`).
 
