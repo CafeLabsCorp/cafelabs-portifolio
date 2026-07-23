@@ -35,6 +35,7 @@ For anyone who wants to understand the business behind the code, see
 | Animations | Framer Motion |
 | Icons | Lucide React + custom SVGs |
 | Light/dark theme | `next-themes` |
+| Internationalization | `next-intl` (locales: `pt` default, `en`) |
 | Deploy | Vercel |
 
 ## Prerequisites
@@ -49,7 +50,10 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000) — it redirects to
+`/pt` (default locale); switch to `/en` from the language button in the
+header, or open [http://localhost:3000/en](http://localhost:3000/en)
+directly.
 
 Other available scripts (`package.json`):
 
@@ -61,13 +65,19 @@ Other available scripts (`package.json`):
 
 ```
 src/
+  proxy.ts             # next-intl middleware: resolves locale, redirects to /pt or /en
+  i18n/
+    routing.ts          # Locales (pt default, en) and routing config
+    request.ts           # Loads messages/{locale}.json server-side
+    navigation.ts         # Locale-aware Link/usePathname/useRouter
   app/
-    layout.tsx        # RootLayout: fonts, ThemeProvider, fixed Header/Footer
-    page.tsx           # Home: Hero + Manifesto + BentoGrid + Setores
-    globals.css        # Design tokens (colors, fonts) via Tailwind v4's @theme
+    [locale]/
+      layout.tsx          # RootLayout: fonts, locale resolution, NextIntlClientProvider + ThemeProvider, fixed Header/Footer
+      page.tsx             # Home: Hero + Manifesto + BentoGrid + Setores
+      globals.css          # Design tokens (colors, fonts) via Tailwind v4's @theme
   components/
     layout/
-      header.tsx        # Fixed nav, conditional dark/light logo, mobile menu
+      header.tsx        # Fixed nav, conditional dark/light logo, language switcher, mobile menu
       hero.tsx           # Opening section (100dvh) with CTAs
       manifesto.tsx      # Build/Measure/Learn methodology
       bento-grid.tsx     # "O Laboratório" grid — Café Labs' product cards
@@ -75,10 +85,14 @@ src/
       footer.tsx         # Contact CTA (email) + copyright
     ui/
       theme-toggle.tsx           # Light/dark theme toggle button
+      language-switcher.tsx       # PT/EN toggle button
       mind-logo.tsx               # "mind" product's SVG wordmark
+      forge-logo.tsx               # Forge Skill Library's SVG wordmark
       logo-*.tsx                  # Alternative Café Labs logo concepts (not currently used — see docs/ARQUITETURA.md)
   providers/
     theme-provider.tsx  # next-themes wrapper
+messages/
+  en.json / pt.json     # All UI strings, one namespace per component
 public/
   logo_dark.svg / logo_light.svg   # Café Labs logo (Jarra-Erlenmeyer)
   dindin-logo.svg / domo-logo.svg  # Product logos used in the bento grid

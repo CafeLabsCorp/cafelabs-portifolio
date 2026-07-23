@@ -7,9 +7,9 @@
 - **Hosting**: Vercel.
 - **Production domain**: [cafelabs.net](https://cafelabs.net) (Café Labs'
   institutional site).
-- **Repository**: `CafeLabsDev/cafelabs-portifolio` on GitHub
+- **Repository**: `CafeLabsCorp/cafelabs-portifolio` on GitHub
   (`git remote -v` confirms `origin` pointing to
-  `https://github.com/CafeLabsDev/cafelabs-portifolio.git`).
+  `https://github.com/CafeLabsCorp/cafelabs-portifolio.git`).
 
 There's no `vercel.json` file in this repo, nor a CI workflow of its own
 (`.github/workflows` doesn't exist) — the project doesn't define a custom
@@ -37,6 +37,16 @@ are actually enabled/used in the current workflow — the project works
 directly on `main` with no feature branches (see `.gitignore`/`git log`: the
 only branch is `main`), so in practice the observed flow is
 "push to `main` → build → deploy to production", with no preview step.
+
+`TODO: confirmar`: on 2026-07-23, automatic Vercel deploys stopped
+triggering on push for this project and the other 4 Café Labs sites hosted
+on Vercel under the `CafeLabsCorp` org, requiring a manual deploy the day
+before — root cause not confirmed as of that date (candidates under
+investigation: the GitHub App installation/access for Vercel under
+`CafeLabsCorp`, or a stricter Third-party Access policy on the org). Not
+observable from this repo; check the Vercel dashboard/GitHub App settings
+before assuming the "push → automatic build" flow above is currently
+working end-to-end.
 
 ## Environments
 
