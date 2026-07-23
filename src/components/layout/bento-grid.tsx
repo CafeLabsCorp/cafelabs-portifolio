@@ -57,7 +57,7 @@ const experimentos: {
     descriptionKey: "mindDescription",
     statusKey: "mindStatus",
     stack: ["Markdown", "Claude Code"],
-    span: "md:col-span-1",
+    span: "md:col-span-2",
     link: "https://mind.cafelabs.net",
   },
 ];
