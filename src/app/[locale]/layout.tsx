@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Poppins, Fira_Code } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import "./globals.css";
@@ -57,6 +58,7 @@ export default async function RootLayout({
             <Footer />
           </ThemeProvider>
         </NextIntlClientProvider>
+        <Analytics />
       </body>
     </html>
   );
