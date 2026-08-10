@@ -88,6 +88,55 @@ Composição simples, em ordem de scroll:
 
 (O `Footer` não está aqui — vem do `layout.tsx`.)
 
+## Rastreio ponta a ponta: trocando o idioma
+
+O lugar mais claro pra ver todas as camadas deste app se conectarem numa
+única ação do usuário é o seletor de idioma — ele passa pelo middleware,
+pela config de roteamento, pela URL, pelas traduções renderizadas no
+servidor e pelo re-render no client.
+
+1. **Clique** — o usuário clica no botão renderizado por `LanguageSwitcher`
+   (`src/components/ui/language-switcher.tsx`), exibido dentro do `Header`
+   (`src/components/layout/header.tsx`). O `onClick` calcula `nextLocale`
+   (`locale === "pt" ? "en" : "pt"`, vindo de `useLocale()`) e chama
+   `router.replace(pathname, { locale: nextLocale })`.
+2. **Router ciente de idioma** — `router`/`usePathname` vêm de
+   `src/i18n/navigation.ts` (`createNavigation(routing)`, encapsulando
+   `next-intl/navigation`), não de `next/navigation` diretamente. `replace`
+   reescreve o path atual com o novo prefixo de idioma (ex.: `/pt` → `/en`)
+   e navega até ele no client — sem reload completo da página.
+3. **Middleware roda de novo** — o Next.js reavalia `src/proxy.ts`
+   (`createMiddleware(routing)`, casado contra todo path exceto `/api`,
+   `/_next`, `/_vercel` e arquivos com extensão, via `config.matcher`) pra
+   nova URL. Como `/en/...` já carrega um segmento de idioma válido, o
+   middleware deixa passar como está — o caso de redirecionar pro idioma
+   padrão só se aplica a um path sem nenhum prefixo de idioma.
+4. **Idioma resolvido no servidor** — a requisição de `/en` re-renderiza o
+   `RootLayout` (`src/app/[locale]/layout.tsx`), server component
+   assíncrono que lê `params.locale`, valida contra `routing.locales` via
+   `hasLocale()`, e chamaria `notFound()` se fosse inválido (não é, aqui).
+5. **Mensagens recarregadas** — `src/i18n/request.ts` (`getRequestConfig`)
+   resolve o mesmo `locale` e faz `import("../../messages/en.json")`,
+   retornando `{ locale, messages }`. O `RootLayout` envolve a árvore em
+   `NextIntlClientProvider` com essas mensagens, disponibilizando-as pra
+   todo componente client abaixo dele.
+6. **UI re-renderiza no novo idioma** — todo componente client que chama
+   `useTranslations("<Namespace>")` (`Header`, `Footer`, `Hero`,
+   `Manifesto`, `BentoGrid`, `Setores`, o próprio `LanguageSwitcher`) relê
+   suas chaves do novo `en.json` e re-renderiza — nenhum componente guarda
+   cópia própria do texto, então não há mais nada pra atualizar na mão. O
+   próprio label do `LanguageSwitcher` (guiado por `useLocale()`) agora
+   mostra `pt` como próxima opção.
+
+Não há escrita de dado nenhuma nesse fluxo — é uma troca de URL/estado no
+client mais um round-trip ao servidor pra buscar as traduções do novo
+idioma; nada é persistido pelo código deste app (não existe escrita de
+cookie/localStorage neste código-fonte). `TODO: confirmar` se o middleware
+do `next-intl` seta um cookie de idioma por baixo dos panos pra lembrar a
+preferência numa visita nova sem idioma na URL — isso é documentado como
+comportamento padrão da lib, mas não é observável só lendo o código-fonte
+deste repositório.
+
 ## Componentes de `layout/`
 
 | Componente | Seção / âncora | O que faz |
@@ -181,6 +230,49 @@ Cross-referência: o Mind (base de conhecimento pessoal do autor) mantém em
 o registro de quais produtos este repo referencia e por quê — relevante para
 quem for entender o contexto de negócio por trás dos links, mas não é
 necessário para trabalhar no código.
+
+## Superfície de integração
+
+Este projeto não tem backend próprio nem `docs/BACKEND.md` — não há form que
+submete pra algum lugar, não há CMS, nem feed buscado de fora. A única
+integração externa de fato é analytics; todo o resto que o client "alcança"
+é um link de saída simples, não uma troca de dados.
+
+### Vercel Analytics (`@vercel/analytics`)
+
+- **Como é endereçado**: `<Analytics />` (de `@vercel/analytics/next`),
+  montado uma vez em `src/app/[locale]/layout.tsx`, dentro do `<body>` depois
+  do `<Footer />` — então está presente em toda página/idioma (só existe uma
+  página hoje, ver acima).
+- **O que envia / recebe de volta**: o script client injetado coleta eventos
+  de pageview e os posta pro endpoint de coleta da própria Vercel, em
+  `/_vercel/insights/*`, tratado inteiramente pela edge network da Vercel —
+  nenhuma rota ou código deste repo recebe ou processa esse dado.
+- **Quem pode chamar**: nenhuma superfície de auth — é um script de tracking
+  client-side, não uma API que este app expõe.
+- **Como falha**: silenciosamente. Se o app não estiver servido pela
+  plataforma da Vercel (ex.: `next build && next start` local ou em outro
+  lugar), o script não tem pra onde reportar e nada na UI quebra ou indica
+  isso.
+- **O que muda**: nada no estado próprio deste app — é telemetria write-only
+  pro dashboard da Vercel. Nenhum evento customizado é disparado em lugar
+  nenhum deste código, só o tracking padrão de pageview que o `<Analytics />`
+  já traz.
+- **Configuração**: nenhuma necessária neste repo — sem API key, sem env var
+  (ver [README.pt-br.md § Configuração](../README.pt-br.md#configuração)).
+  Ativa automaticamente quando o projeto é deployado na Vercel.
+
+### O resto é link de saída, não integração
+
+- **Cards de produto do bento grid** (`bento-grid.tsx`, ver acima) — o
+  `link` de cada card é uma URL externa simples pro site próprio daquele
+  produto (`domo.cafelabs.net`, `dindin.cafelabs.net`, etc.); este app nunca
+  busca nada deles.
+- **CTA de contato do Footer** (`footer.tsx`) — `mailto:` (mobile) ou URL de
+  compose do Gmail (desktop), montada no client a partir de um endereço
+  hardcoded (`contato@cafelabs.net`); o botão "copiar e-mail" usa
+  `navigator.clipboard.writeText`, uma ação local do navegador. Nenhuma
+  requisição é enviada pra lugar nenhum em nenhum dos dois casos.
 
 ## `ui/logo-*.tsx`
 

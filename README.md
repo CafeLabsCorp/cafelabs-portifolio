@@ -61,6 +61,27 @@ Other available scripts (`package.json`):
 - `npm run start` — serves the production build.
 - `npm run lint` — ESLint (`eslint-config-next`, core-web-vitals + TypeScript).
 
+## Configuration
+
+This project needs no environment variables or config files to run locally.
+`next.config.ts` is a stock, empty Next.js config, there's no `.env`/
+`.env.example` committed (`.env*` is gitignored), and there's no
+`process.env` read anywhere in `src`. The one external integration, [Vercel
+Analytics](https://vercel.com/docs/analytics) (`@vercel/analytics`, wired in
+`src/app/[locale]/layout.tsx`), needs no API key or config either — it
+activates automatically once the project is deployed on Vercel and is a
+silent no-op when run locally. See
+[docs/ARQUITETURA.md § Integration surface](docs/ARQUITETURA.md#integration-surface)
+for how it's wired.
+
+## Tests
+
+There is no automated test suite in this repository (no `*.test.*`/
+`*.spec.*` files, no test runner in `package.json`). The only automated
+check is `npm run lint` (ESLint). `TODO: confirmar` whether a test suite is
+planned — until then, verify changes manually with `npm run dev`, checking
+both locales (`/pt`, `/en`) and both themes.
+
 ## Folder structure
 
 ```
