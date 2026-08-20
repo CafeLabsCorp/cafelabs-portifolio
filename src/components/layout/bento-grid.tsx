@@ -60,6 +60,16 @@ const experimentos: {
     span: "md:col-span-2",
     link: "https://mind.cafelabs.net",
   },
+  {
+    id: 5,
+    title: "Micare",
+    logo: "/micare-logo.svg",
+    descriptionKey: "micareDescription",
+    statusKey: "micareStatus",
+    stack: ["Flutter", "Firebase"],
+    span: "md:col-span-2",
+    link: "https://micare.cafelabs.net",
+  },
 ];
 
 export function BentoGrid() {

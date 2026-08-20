@@ -45,13 +45,15 @@
     "statusLabel": "[ status: {status} ]",
     "openAria": "Open {title}",
     "domoDescription": "Household management app for families and groups: shared pantry, shopping list, and home organization by member.",
-    "domoStatus": "beta",
+    "domoStatus": "ACTIVE",
     "dindinDescription": "Personal finance control via 'envelopes': income comes in, gets allocated across categories, and expenses come out of each one.",
     "dindinStatus": "ACTIVE",
     "forgeDescription": "Gallery of Forge's specialized agents (orchestrator + team), with the full prompt and live search of the public repository.",
     "forgeStatus": "coming soon",
     "mindDescription": "Generic personal knowledge base, versioned and integrated with Claude Code — clone it and build your own project 'mind'.",
-    "mindStatus": "open source"
+    "mindStatus": "open source",
+    "micareDescription": "Digital prenatal card: visit and exam records kept by the healthcare provider, with read-only access for the patient.",
+    "micareStatus": "coming soon"
   },
   "Setores": {
     "heading": "Our Infrastructure.",

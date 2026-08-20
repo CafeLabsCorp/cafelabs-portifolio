@@ -45,13 +45,15 @@
     "statusLabel": "[ status: {status} ]",
     "openAria": "Abrir {title}",
     "domoDescription": "App de gestão doméstica para famílias e grupos: dispensa compartilhada, lista de compras e organização da casa por membros.",
-    "domoStatus": "beta",
+    "domoStatus": "ATIVO",
     "dindinDescription": "Controle financeiro pessoal por 'caixinhas': receitas entram, são alocadas entre categorias e os gastos saem de cada uma.",
     "dindinStatus": "ATIVO",
     "forgeDescription": "Galeria dos agentes especializados do Forge (orquestrador + time), com prompt completo e busca ao vivo do repositório público.",
     "forgeStatus": "em breve",
     "mindDescription": "Base genérica de conhecimento pessoal versionado e integrado ao Claude Code — clone e monte a sua própria 'mente' de projetos.",
-    "mindStatus": "open source"
+    "mindStatus": "open source",
+    "micareDescription": "Cartão de pré-natal digital: registro de consultas e exames pela profissional de saúde, com acesso somente-leitura para a paciente.",
+    "micareStatus": "em breve"
   },
   "Setores": {
     "heading": "Nossa Infraestrutura.",
