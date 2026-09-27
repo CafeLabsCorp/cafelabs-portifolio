@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { Code2, ShoppingCart, Shirt, Megaphone } from "lucide-react";
+import { Code2, FlaskConical, Lock, Coffee } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 const setoresData = [
@@ -13,24 +13,24 @@ const setoresData = [
     isLocked: false
   },
   {
-    icon: <ShoppingCart className="w-8 h-8 mb-4 text-accent" />,
-    titleKey: "ecommerceTitle",
-    focusKey: "ecommerceFocus",
-    activityKeys: ["ecommerceActivity1", "ecommerceActivity2", "ecommerceActivity3"],
+    icon: <FlaskConical className="w-8 h-8 mb-4 text-accent" />,
+    titleKey: "locked1Title",
+    focusKey: "locked1Focus",
+    activityKeys: ["locked1Activity1", "locked1Activity2", "locked1Activity3"],
     isLocked: true
   },
   {
-    icon: <Shirt className="w-8 h-8 mb-4 text-foreground/80" />,
-    titleKey: "modaTitle",
-    focusKey: "modaFocus",
-    activityKeys: ["modaActivity1", "modaActivity2", "modaActivity3"],
+    icon: <Lock className="w-8 h-8 mb-4 text-foreground/80" />,
+    titleKey: "locked2Title",
+    focusKey: "locked2Focus",
+    activityKeys: ["locked2Activity1", "locked2Activity2", "locked2Activity3"],
     isLocked: true
   },
   {
-    icon: <Megaphone className="w-8 h-8 mb-4 text-accent" />,
-    titleKey: "marketingTitle",
-    focusKey: "marketingFocus",
-    activityKeys: ["marketingActivity1", "marketingActivity2", "marketingActivity3"],
+    icon: <Coffee className="w-8 h-8 mb-4 text-accent" />,
+    titleKey: "locked3Title",
+    focusKey: "locked3Focus",
+    activityKeys: ["locked3Activity1", "locked3Activity2", "locked3Activity3"],
     isLocked: true
   }
 ] as const;
@@ -95,8 +95,9 @@ export function Setores() {
               variants={cardVariants}
               className="relative overflow-hidden p-8 rounded-3xl border border-borderUI bg-background"
             >
-              {/* Se estiver bloqueado, aplicamos blur, reduzimos opacidade e travamos o clique */}
-              <div className={`transition-all duration-300 ${setor.isLocked ? "blur-[6px] opacity-30 select-none pointer-events-none grayscale" : "hover:border-accent/30"}`}>
+              {/* Se estiver bloqueado, aplicamos blur, reduzimos opacidade e travamos o clique.
+                  O conteúdo por baixo é só easter egg (nunca o setor real) e fica fora do leitor de tela. */}
+              <div aria-hidden={setor.isLocked || undefined} className={`transition-all duration-300 ${setor.isLocked ? "blur-[6px] opacity-30 select-none pointer-events-none grayscale" : "hover:border-accent/30"}`}>
                 {setor.icon}
                 <h3 className="font-poppins text-2xl font-semibold mb-1">
                   {t(setor.titleKey)}
