@@ -12,12 +12,12 @@ export function ThemeToggle() {
 
   // Evita o erro de hidratação do Next.js
   useEffect(() => setMounted(true), []);
-  if (!mounted) return <div className="w-9 h-9"></div>;
+  if (!mounted) return <div className="w-11 h-11"></div>;
 
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="p-2 rounded-full border border-borderUI hover:bg-foreground/5 transition-colors"
+      className="p-3 rounded-full border border-borderUI hover:bg-foreground/5 transition-colors"
       aria-label={t("label")}
     >
       {theme === "dark" ? (

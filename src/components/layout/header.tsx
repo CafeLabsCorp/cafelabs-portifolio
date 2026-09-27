@@ -99,7 +99,7 @@ export function Header() {
         </nav>
 
         {/* Ações Desktop & Toggle Mobile */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4">
           <LanguageSwitcher />
           <ThemeToggle />
 
@@ -113,7 +113,7 @@ export function Header() {
 
           {/* Botão Hambúrguer */}
           <button
-            className="md:hidden p-2 text-foreground"
+            className="md:hidden p-2.5 text-foreground"
             onClick={() => setIsOpen(!isOpen)}
             aria-label={t("openMenu")}
             aria-expanded={isOpen}
