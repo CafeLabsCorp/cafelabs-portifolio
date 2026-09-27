@@ -64,7 +64,7 @@ export function Hero() {
         <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
           <Link
             href="#laboratorio"
-            className="group w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-accent text-background rounded-full font-poppins font-semibold hover:opacity-90 hover:scale-105 transition-all"
+            className="group w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-accent text-on-accent rounded-full font-poppins font-semibold hover:opacity-90 hover:scale-105 transition-all"
           >
             {t("ctaPrimary")}
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -82,7 +82,7 @@ export function Hero() {
 
       <a
         href="#manifesto"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 font-fira text-xs uppercase tracking-wide text-foreground/50 transition-colors hover:text-foreground/80"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 font-fira text-xs uppercase tracking-wide text-muted transition-colors hover:text-foreground/80"
       >
         {t("scrollHint")}
         <ArrowRight

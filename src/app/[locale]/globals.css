@@ -7,6 +7,10 @@
   --color-accent: var(--marca-accent);
   --color-sandbox: var(--verde-sandbox);
   --color-borderUI: var(--borda-sutil);
+  /* Tokens de contraste (AA): texto sobre o laranja, verde como texto, texto secundário */
+  --color-on-accent: var(--texto-sobre-accent);
+  --color-sandbox-text: var(--verde-sandbox-texto);
+  --color-muted: var(--texto-suave);
 
   /* Isso cria as classes font-poppins, font-inter, font-fira */
   --font-poppins: var(--font-poppins), sans-serif;
@@ -32,6 +36,9 @@ html {
     --marca-accent: #FF5411;
     --verde-sandbox: #00E699;
     --borda-sutil: #E5E0DA;
+    --texto-sobre-accent: #161414; /* ~5.9:1 sobre #FF5411 (branco dava ~3.2:1) */
+    --verde-sandbox-texto: #007A4D; /* #00E699 como texto no claro dava ~1.6:1 */
+    --texto-suave: #6B6360;         /* substitui foreground/40-50 no claro (~5.7:1) */
   }
 
   .dark {
@@ -39,6 +46,8 @@ html {
     --bg-principal: #161414;
     --texto-principal: #F5EFEB;
     --borda-sutil: #2A2626;
+    --verde-sandbox-texto: #00E699;
+    --texto-suave: #A39A94;
   }
 
   body {

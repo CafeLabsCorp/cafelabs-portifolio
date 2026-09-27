@@ -132,7 +132,7 @@ export function BentoGrid() {
 
               {/* Header do Card (Status e Ícone) */}
               <div className="flex justify-between items-start mb-8">
-                <span className="font-fira text-xs uppercase tracking-wider text-sandbox bg-sandbox/10 px-3 py-1 rounded-full">
+                <span className="font-fira text-xs uppercase tracking-wider text-sandbox-text bg-sandbox/10 px-3 py-1 rounded-full">
                   {t("statusLabel", { status })}
                 </span>
                 {projeto.link && (
@@ -174,7 +174,7 @@ export function BentoGrid() {
                 {projeto.stack.map((tech) => (
                   <span
                     key={tech}
-                    className="font-fira text-xs text-foreground/50 border border-borderUI px-2 py-1 rounded-md"
+                    className="font-fira text-xs text-muted border border-borderUI px-2 py-1 rounded-md"
                   >
                     {tech}
                   </span>

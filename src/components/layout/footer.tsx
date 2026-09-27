@@ -80,7 +80,7 @@ export function Footer() {
               <Copy className="w-4 h-4 group-hover:scale-110 transition-transform" />
             )}
             {copied ? (
-              <span className="text-sandbox font-medium">{t("emailCopied")}</span>
+              <span className="text-sandbox-text font-medium">{t("emailCopied")}</span>
             ) : (
               t("copyEmail")
             )}
@@ -93,13 +93,13 @@ export function Footer() {
             Café Labs <span className="text-accent">.</span>
           </div>
 
-          <div className="flex items-center gap-4 text-sm font-fira text-foreground/50">
+          <div className="flex items-center gap-4 text-sm font-fira text-muted">
             <Link href="https://cafelabs.net" className="hover:text-accent transition-colors">cafelabs.net</Link>
             <span>|</span>
             <Link href="https://cafelabs.net.br" className="hover:text-accent transition-colors">cafelabs.net.br</Link>
           </div>
 
-          <div className="font-fira text-xs text-foreground/40 text-center md:text-right">
+          <div className="font-fira text-xs text-muted text-center md:text-right">
             © {new Date().getFullYear()} {t("developedBy")} <br />
             {t("hostedOn")}
           </div>

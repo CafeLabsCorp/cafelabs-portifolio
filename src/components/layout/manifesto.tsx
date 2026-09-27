@@ -56,7 +56,7 @@ export function Manifesto() {
               <span className="text-accent">{t("headingLine2")}</span>
             </motion.h2>
 
-            <motion.div variants={itemVariants} className="font-fira text-sm text-foreground/50 border-l-2 border-accent pl-4 py-1">
+            <motion.div variants={itemVariants} className="font-fira text-sm text-muted border-l-2 border-accent pl-4 py-1">
               {t("directive")}
             </motion.div>
 
