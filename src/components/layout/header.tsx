@@ -23,6 +23,16 @@ export function Header() {
     setMounted(true);
   }, []);
 
+  // Menu mobile fecha com Esc
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isOpen]);
+
   const links = [
     { name: t("navManifesto"), href: "#manifesto" },
     { name: t("navLaboratorio"), href: "#laboratorio" },
@@ -106,6 +116,7 @@ export function Header() {
             className="md:hidden p-2 text-foreground"
             onClick={() => setIsOpen(!isOpen)}
             aria-label={t("openMenu")}
+            aria-expanded={isOpen}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -114,6 +125,22 @@ export function Header() {
       </div>
 
       {/* Dropdown Menu Mobile */}
+      {/* Backdrop: tocar fora fecha o menu e impede clique acidental no conteúdo atrás */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            key="backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => setIsOpen(false)}
+            aria-hidden="true"
+            className="md:hidden fixed inset-0 top-16 h-[calc(100dvh-4rem)] bg-black/40"
+          />
+        )}
+      </AnimatePresence>
+
       <AnimatePresence>
         {isOpen && (
           <motion.div
