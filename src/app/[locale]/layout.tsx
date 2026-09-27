@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import "./globals.css";
 import { routing } from "../../i18n/routing";
 import { ThemeProvider } from "../../providers/theme-provider";
+import { MotionProvider } from "../../providers/motion-provider";
 import { Header } from "../../components/layout/header";
 import { Footer } from "../../components/layout/footer";
 
@@ -81,9 +82,11 @@ export default async function RootLayout({
       <body className={`${inter.variable} ${poppins.variable} ${firaCode.variable} font-inter antialiased`}>
         <NextIntlClientProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <Header />
-            {children}
-            <Footer />
+            <MotionProvider>
+              <Header />
+              {children}
+              <Footer />
+            </MotionProvider>
           </ThemeProvider>
         </NextIntlClientProvider>
         <Analytics />
