@@ -1,4 +1,8 @@
 {
+  "Metadata": {
+    "title": "Café Labs | Multi-sector Sandbox",
+    "description": "A hands-on experimentation ecosystem where ideas become software, design, and product."
+  },
   "Header": {
     "navManifesto": "Manifesto",
     "navLaboratorio": "Lab",

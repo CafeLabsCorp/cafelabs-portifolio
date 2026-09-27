@@ -1,4 +1,8 @@
 {
+  "Metadata": {
+    "title": "Café Labs | Sandbox Multisetorial",
+    "description": "Ecossistema de experimentação prática onde ideias viram software, design e produto."
+  },
   "Header": {
     "navManifesto": "Manifesto",
     "navLaboratorio": "Laboratório",
